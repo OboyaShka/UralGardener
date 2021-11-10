@@ -1,0 +1,23 @@
+<nav class="navbar">
+  <a [routerLink]="['/']"><img src="assets/images/main_logo.svg" alt="main-logo"></a>
+  <input type="search" placeholder="Поиск товара...">
+
+  <a>7260 руб <img src="assets/icons/cart.svg"></a>
+
+
+  <div *ngIf="!authService.isAuthenticated()">
+    <a [routerLink]="['/login']">Вход</a>
+    <p>/</p>
+    <a [routerLink]="['/register']">Регистрация</a>
+  </div>
+
+  <div *ngIf="authService.isAuthenticated()">
+    <a>Личный кабинет</a>
+    <p>/</p>
+    <a [routerLink]="['/']" (click)="this.authService.logout()">Выйти</a>
+  </div>
+
+</nav>
+
+<router-outlet></router-outlet>
+
