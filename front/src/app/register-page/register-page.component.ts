@@ -66,7 +66,7 @@ export class RegisterPageComponent implements OnInit {
     const user: User = {
       phone: this.form.value.phone,
       password: this.form.value.passwords.password,
-      email: this.form.value.phone,
+      email: this.form.value.email,
       fio: this.form.value.fio
     }
 

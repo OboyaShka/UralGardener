@@ -165,7 +165,7 @@ textarea {
   align-items: center;
 }
 
-.navbar {
+.navbar ul {
   display: flex;
   justify-content: space-between;
   align-items: center;
@@ -175,14 +175,14 @@ textarea {
   opacity: 0.9;
   margin-bottom: 1rem;
 }
-.navbar div {
+.navbar ul div {
   display: flex;
   align-items: center;
 }
-.navbar img:hover {
+.navbar ul img:hover {
   cursor: pointer;
 }
-.navbar input {
+.navbar ul input {
   display: block;
   width: 370px;
   margin-top: 0.4rem;
@@ -190,29 +190,29 @@ textarea {
   font-size: 18px;
   border: 2px solid var(--border-color);
 }
-.navbar.main {
+.navbar ul.main {
   justify-content: center;
   border-bottom: 1px solid var(--dark-color);
 }
-.navbar ul {
+.navbar ul ul {
   display: flex;
 }
-.navbar li.active a {
+.navbar ul li.active a {
   color: var(--dark-color);
   font-weight: bold;
   cursor: default;
 }
-.navbar a {
+.navbar ul a {
   display: flex;
   justify-content: center;
   align-items: center;
   padding: 0.45rem;
   margin: 0 0.25rem;
 }
-.navbar a img {
+.navbar ul a img {
   margin-left: 5px;
 }
-.navbar a:hover {
+.navbar ul a:hover {
   color: var(--green-color);
 }
 

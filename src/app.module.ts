@@ -5,13 +5,15 @@ import {ProductsModule} from "./products/products.module";
 import {MongooseModule} from "@nestjs/mongoose";
 import { ConfigModule} from '@nestjs/config'
 import { AuthModule } from './auth/auth.module';
+import { ProfileModule } from './profile/profile.module';
 
 @Module({
   imports: [
     AuthModule,
     ProductsModule,
     MongooseModule.forRoot(`mongodb+srv://poznanskiy:poz123@cluster0.tnzoj.mongodb.net/myFirstDatabase?retryWrites=true&w=majority`),
-    ConfigModule.forRoot()
+    ConfigModule.forRoot(),
+    ProfileModule
   ],
   controllers: [AppController],
   providers: [AppService],

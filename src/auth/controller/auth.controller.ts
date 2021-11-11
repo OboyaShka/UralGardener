@@ -16,24 +16,26 @@ export class AuthController {
   @UseGuards(AuthGuard('local'))
   @Post('/login')
   async login(@Request() req) {
-    return this.authService.login(req.user)
+    return this.authService.login(req.user._doc)
   }
 
   @Post('/register')
   async register(@Request() req) {
-    console.log(2)
     return this.authService.register(req.body)
   }
 
   @UseGuards(AuthGuard('jwt'))
   @Get('profile')
   async getProfile(@Request() req) {
-    return req.user
+    const id = await this.authService.decodeTokenId(req.headers.authorization.slice(7))
+    const user = await this.userService.find(id)
+    return user
   }
 
   @UseGuards(AuthGuard('jwt'))
   @Get('refresh')
   async refresh(@Request() req) {
+    console.log(req)
     const user = await this.userService.find(req.user.id)
     return this.authService.login(user)
   }

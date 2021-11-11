@@ -20,7 +20,9 @@ export class UserService {
     return this.userModel.findById(id)
   }
 
+
   async create(user: UserDto): Promise<User | undefined> {
+    user.role = 'user'
     const newUser = new this.userModel(user)
     return newUser.save()
   }

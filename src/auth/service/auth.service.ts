@@ -3,6 +3,8 @@ import {UserDto} from "../../user/dto/user.dto";
 import {Injectable} from "@nestjs/common";
 import {JwtService} from "@nestjs/jwt";
 import {ConfigService} from "@nestjs/config";
+import {AST} from "eslint";
+import Token = AST.Token;
 
 @Injectable()
 export class AuthService {
@@ -23,6 +25,13 @@ export class AuthService {
     return null
   }
 
+  // @ts-ignore
+  async decodeTokenId(token: string): Promise<string> {
+    const jwtDecode = await this.jwtService.decode(token)
+    // @ts-ignore
+    return jwtDecode._id
+  }
+
   async login(user: UserDto) {
     const payload = { _id: user._id }
     const jwt = this.jwtService.sign(payload)
@@ -38,5 +47,4 @@ export class AuthService {
     const newUser = await this.userService.create(user)
     return this.login(newUser)
   }
-
 }

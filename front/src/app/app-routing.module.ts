@@ -10,6 +10,7 @@ import {DivisionPageComponent} from "./division-page/division-page.component";
 import {ProductPageComponent} from "./product-page/product-page.component";
 import {RegisterPageComponent} from "./register-page/register-page.component";
 import {ProfilePageComponent} from "./profile-page/profile-page.component";
+import {AuthGuard} from "./shared/auth.guard";
 
 const routes: Routes = [
   {
@@ -18,7 +19,7 @@ const routes: Routes = [
       {path: '', component: MainPageComponent},
       {path: 'login', component: LoginPageComponent},
       {path: 'register', component: RegisterPageComponent},
-      {path: 'profile', component: ProfilePageComponent},
+      {path: 'profile', component: ProfilePageComponent, canActivate: [AuthGuard]},
       {path: 'catalog', component: CatalogPageComponent, children: [
           {
             path: ':id', component: CategoryPageComponent, children: [

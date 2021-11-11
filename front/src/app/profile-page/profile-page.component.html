@@ -1,7 +1,132 @@
 <div class="profile-container">
   <h2>Личный кабинет</h2>
   <div class="profile-main">
-    <div class="left-menu">1</div>
-    <div class="right-content">2</div>
+    <div class="left-content">
+      <div class="left-menu">
+        <a class="menu-item active">Мои данные</a>
+        <a class="menu-item">Мои заказы</a>
+        <a class="menu-item">Выйти</a>
+      </div>
+    </div>
+
+    <form class="right-content" [formGroup]="form" (ngSubmit)="submit()">
+      <div>
+        <!--        <div class="alert alert-danger" *ngIf="authService.error$ | async as error">{{error}}</div>-->
+
+        <div
+          class="form-control"
+          [ngClass]="{invalid: form.get('phone')?.touched && form.get('phone')?.invalid}"
+        >
+          <label for="phone">Телефон: </label>
+          <input id="phone" placeholder="+7 (___)-___-__-__" type="tel" formControlName="phone">
+          <div
+            *ngIf="form.get('phone')?.touched && form.get('phone')?.invalid; else temp"
+            class="validation"
+          >
+            <small
+              *ngIf="form.get('phone')?.errors?.required"
+            >Введите телефон</small>
+            <small
+              *ngIf="form.get('phone')?.errors?.pattern"
+            >Телефон введён неправильно</small>
+          </div>
+
+        </div>
+
+        <div
+          class="form-control"
+          [ngClass]="{invalid: form.get('fio')?.touched && form.get('fio')?.invalid}"
+        >
+          <label for="email">Ф.И.О: </label>
+          <input id="fio" placeholder="Иван Иванович Иванов" type="fio" formControlName="fio">
+          <div
+            *ngIf="form.get('fio')?.touched && form.get('fio')?.invalid; else temp"
+            class="validation"
+          >
+            <small
+              *ngIf="form.get('fio')?.errors?.required"
+            >Введите Ф.И.О</small>
+          </div>
+        </div>
+        <div
+          class="form-control"
+          [ngClass]="{invalid: form.get('email')?.touched && form.get('email')?.invalid}"
+        >
+          <label for="email">Ваш e-mail (Не обязательно): </label>
+          <input id="email" placeholder="example@gmail.com" type="email" formControlName="email">
+          <div
+            *ngIf="form.get('email')?.touched && form.get('email')?.invalid; else temp"
+            class="validation"
+          >
+            <small
+              *ngIf="form.get('email')?.errors?.email"
+            >Email введён неправильно</small>
+          </div>
+        </div>
+
+
+      </div>
+
+      <div>
+        <div formGroupName="passwords">
+          <div
+            class="form-control"
+            [ngClass]="{invalid: form.get('passwords')?.get('password')?.touched && form.get('passwords')?.get('password')?.invalid}"
+          >
+            <label for="password">Придумайте пароль: </label>
+            <input id="password" placeholder="более 6 символов" type="password" formControlName="password">
+            <div
+              *ngIf="form.get('passwords')?.get('password')?.touched && form.get('passwords')?.get('password')?.invalid ; else temp"
+              class="validation"
+            >
+              <small
+                *ngIf="form.get('passwords')?.get('password')?.errors?.required"
+              >Введите пароль</small>
+
+              <small
+                *ngIf="form.get('passwords')?.get('password')?.errors?.minlength"
+              >Введите пароль больше шести символов</small>
+
+            </div>
+          </div>
+          <div
+            class="form-control"
+            [ngClass]="{invalid: form.get('passwords')?.get('passwordRepeat')?.touched && (form.get('passwords')?.errors?.mismatchedPasswords || form.get('passwords')?.get('passwordRepeat')?.invalid)}"
+          >
+            <label for="password-repeat">Повторите пароль: </label>
+            <input id="password-repeat" placeholder="более 6 символов" type="password" formControlName="passwordRepeat">
+            <div
+              *ngIf="form.get('passwords')?.get('passwordRepeat')?.touched && form.get('passwords')?.invalid ; else temp"
+              class="validation"
+            >
+              <small
+                *ngIf="form.get('passwords')?.get('passwordRepeat')?.errors?.required"
+              >Повторите пароль</small>
+
+              <small
+                *ngIf="form.get('passwords')?.errors?.mismatchedPasswords"
+              >Пароли не совпадают</small>
+
+            </div>
+          </div>
+        </div>
+
+
+        <div class="center button-container">
+          <button
+            type="submit"
+            class="btn"
+            [disabled]="form.invalid"
+          >Сохранить
+          </button>
+        </div>
+      </div>
+
+    </form>
+
+    <ng-template #temp>
+      <div class="validation"></div>
+    </ng-template>
   </div>
+
 </div>
