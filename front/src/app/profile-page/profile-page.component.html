@@ -9,7 +9,7 @@
       </div>
     </div>
 
-    <form class="right-content" [formGroup]="form" (ngSubmit)="submit()">
+    <form class="right-content" [formGroup]="form" (ngSubmit)="submit()" >
       <div>
         <!--        <div class="alert alert-danger" *ngIf="authService.error$ | async as error">{{error}}</div>-->
 
@@ -73,10 +73,10 @@
             class="form-control"
             [ngClass]="{invalid: form.get('passwords')?.get('password')?.touched && form.get('passwords')?.get('password')?.invalid}"
           >
-            <label for="password">Придумайте пароль: </label>
+            <label for="password">Старый пароль: </label>
             <input id="password" placeholder="более 6 символов" type="password" formControlName="password">
             <div
-              *ngIf="form.get('passwords')?.get('password')?.touched && form.get('passwords')?.get('password')?.invalid ; else temp"
+              *ngIf="form.get('passwords')?.get('password')?.touched && (form.get('passwords')?.errors?.rightPassword || form.get('passwords')?.get('password')?.invalid) ; else temp"
               class="validation"
             >
               <small
@@ -84,28 +84,35 @@
               >Введите пароль</small>
 
               <small
-                *ngIf="form.get('passwords')?.get('password')?.errors?.minlength"
-              >Введите пароль больше шести символов</small>
+                *ngIf="form.get('passwords')?.errors?.rightPassword"
+              >Введите правильный пароль</small>
 
             </div>
           </div>
           <div
             class="form-control"
-            [ngClass]="{invalid: form.get('passwords')?.get('passwordRepeat')?.touched && (form.get('passwords')?.errors?.mismatchedPasswords || form.get('passwords')?.get('passwordRepeat')?.invalid)}"
+            [ngClass]="{invalid: (form.get('passwords')?.get('passwordNew')?.invalid || form.get('passwords')?.invalid)}"
           >
-            <label for="password-repeat">Повторите пароль: </label>
-            <input id="password-repeat" placeholder="более 6 символов" type="password" formControlName="passwordRepeat">
+            <label for="password-repeat">Придумайте пароль: </label>
+            <input
+              id="password-repeat"
+              [readonly]="form.get('passwords')?.errors?.rightPassword
+              || form.get('passwords')?.get('password')?.value === null
+              || form.get('passwords')?.get('password')?.value.length === 0"
+              placeholder="более 6 символов"
+              type="password"
+              formControlName="passwordNew">
             <div
-              *ngIf="form.get('passwords')?.get('passwordRepeat')?.touched && form.get('passwords')?.invalid ; else temp"
+              *ngIf="form.get('passwords')?.get('passwordNew')?.invalid || form.get('passwords')?.invalid ; else temp"
               class="validation"
             >
               <small
-                *ngIf="form.get('passwords')?.get('passwordRepeat')?.errors?.required"
-              >Повторите пароль</small>
+                *ngIf="form.get('passwords')?.get('passwordNew')?.errors?.minlength"
+              >Введите пароль больше шести символов</small>
 
               <small
-                *ngIf="form.get('passwords')?.errors?.mismatchedPasswords"
-              >Пароли не совпадают</small>
+                *ngIf="form.get('passwords')?.errors?.notFilledBoth"
+              >Заполните оба поля</small>
 
             </div>
           </div>

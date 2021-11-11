@@ -43,7 +43,7 @@ const INTERCEPTOR_PROVIDER: Provider = {
     AppRoutingModule,
     FormsModule,
     ReactiveFormsModule,
-    SharedModule
+    SharedModule,
   ],
   providers: [INTERCEPTOR_PROVIDER],
   bootstrap: [AppComponent]

@@ -26,4 +26,9 @@ export class UserService {
     const newUser = new this.userModel(user)
     return newUser.save()
   }
+
+  async patch(user: UserDto): Promise<UserDto> {
+
+    return this.userModel.findByIdAndUpdate(user._id, user, {})
+  }
 }

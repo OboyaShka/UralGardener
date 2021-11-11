@@ -30,7 +30,7 @@ export class AuthService {
   }
 
   login(user: User): Observable<any> {
-    return this.http.post<AuthResponse>(`${environment.url}/auth/login`, user, {headers: this.headers})
+    return this.http.post<AuthResponse>(`${environment.url}/auth/login`, user)
       .pipe(
         tap(this.setToken),
         catchError(this.handleError.bind(this))
@@ -38,7 +38,7 @@ export class AuthService {
   }
 
   register(user: User): Observable<any> {
-    return this.http.post<AuthResponse>(`${environment.url}/auth/register`, user, {headers: this.headers})
+    return this.http.post<AuthResponse>(`${environment.url}/auth/register`, user)
       .pipe(
         tap(this.setToken),
         catchError(this.handleError.bind(this))

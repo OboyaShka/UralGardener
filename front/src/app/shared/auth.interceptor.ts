@@ -18,6 +18,13 @@ export class AuthInterceptor implements HttpInterceptor {
     req: HttpRequest<any>,
     next: HttpHandler
   ): Observable<HttpEvent<any>> {
+
+    req = req.clone({
+      setHeaders: {
+        'Access-Control-Allow-Origin': 'http://localhost:3000'
+      }
+    })
+
     if (this.auth.isAuthenticated()) {
       req = req.clone({
         setHeaders: {

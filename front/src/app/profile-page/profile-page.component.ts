@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import {Component, OnInit} from '@angular/core';
 import {FormBuilder, FormControl, FormGroup, Validators} from "@angular/forms";
 import {AuthService} from "../shared/services/auth.service";
 import {Router} from "@angular/router";
@@ -21,7 +21,7 @@ export class ProfilePageComponent implements OnInit {
     public authService: AuthService,
     private profileService: ProfileService,
     private router: Router,
-    private fb: FormBuilder
+    private fb: FormBuilder,
   ) { }
 
 
@@ -31,23 +31,43 @@ export class ProfilePageComponent implements OnInit {
       email: [this.user?.email, [Validators.email]],
       fio: [this.user?.fio, [Validators.required]],
       passwords:this.fb.group({
-        password: [null, [Validators.required, Validators.minLength(6)]],
-        passwordRepeat: [null, [Validators.required, Validators.minLength(6)]]
-      },{validator: matchingPasswords('password', 'passwordRepeat')})
+        password: [null, []],
+        passwordNew: [null, [Validators.minLength(6)]]
+      }, {validators:
+          [
+            rightPassword('password', this.user?.password),
+            groupComplite('password', 'passwordNew')
+          ]})
 
     })
 
-    function matchingPasswords(passwordKey: string, confirmPasswordKey: string) {
+    function rightPassword(passwordKey: string, userPassword: string | undefined) {
       // @ts-ignore
-      return (group: FormGroup): {[key: string]: any} => {
+      return (group: FormGroup): {[key: string]: any} | null => {
         let password = group.controls[passwordKey];
-        let confirmPassword = group.controls[confirmPasswordKey];
 
-        if (password.value !== confirmPassword.value) {
+        if (password.value !== userPassword && typeof(password.value) === "string" && password.value.length != 0) {
           return {
-            mismatchedPasswords: true
+            rightPassword: true
           };
         }
+        return null
+      }
+    }
+
+    function groupComplite(passwordKey: string, passwordNewKey: string) {
+      return (group: FormGroup): {[key: string]: any} | null => {
+        let password = group.controls[passwordKey];
+        let passwordNew = group.controls[passwordNewKey];
+
+
+        if (typeof(password.value) === "string" && password.value.length != 0 && passwordNew.value === null
+          || typeof(password.value) === "string" && typeof(passwordNew.value) === "string" && password.value.length != 0 && passwordNew.value.length === 0) {
+          return {
+            notFilledBoth: true
+          };
+        }
+        return null
       }
     }
   }
@@ -58,8 +78,9 @@ export class ProfilePageComponent implements OnInit {
     this.createForm()
     this.profileService.getProfile().subscribe((user: User) => {
       this.user = user
-      console.log(this.user)
       this.createForm()
+
+      console.log(2)
     })
 
 
@@ -67,18 +88,30 @@ export class ProfilePageComponent implements OnInit {
   }
 
   submit() {
+
     if (this.form?.invalid) {
       return
     }
 
     const user: User = {
+      _id: this.user!._id,
       phone: this.form.value.phone,
-      password: this.form.value.password
+      fio: this.form.value.fio,
+      email: this.form.value.email,
+      password: this.user!.password
     }
 
-    this.authService.login(user).subscribe(() => {
+    if (this.form.value.passwords.password) {
+      user.password = this.form.value.passwords.passwordNew
+    }
+
+
+    this.profileService.updateProfile(user).subscribe(() => {
       this.form.reset()
-      this.router.navigate(['/profile'])
+      this.profileService.getProfile().subscribe((user: User) => {
+        this.user = user
+        this.createForm()
+      })
       this.submitted = false
     }, () => {
       this.submitted = false
