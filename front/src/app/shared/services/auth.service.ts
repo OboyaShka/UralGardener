@@ -53,6 +53,10 @@ export class AuthService {
     return !!this.token
   }
 
+  isAdmin(): boolean {
+    return localStorage.getItem('user-role') === 'admin'
+  }
+
   private handleError(error: HttpErrorResponse){
     const {message} = error.error
 
@@ -62,13 +66,14 @@ export class AuthService {
   }
 
   private setToken(res: AuthResponse | null) {
+
     if (res) {
       const expDate = new Date(new Date().getTime() + +res.expiresIn * 1000)
       localStorage.setItem('token', res.accessToken)
       localStorage.setItem('token-exp', expDate.toString())
+      localStorage.setItem('user-role', res.userRole)
     } else {
       localStorage.clear()
     }
-
   }
 }

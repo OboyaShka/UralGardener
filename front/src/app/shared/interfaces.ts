@@ -9,4 +9,5 @@ export interface User {
 export interface AuthResponse {
   accessToken: string
   expiresIn: string
+  userRole: string
 }

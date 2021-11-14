@@ -11,6 +11,7 @@ import {ProductPageComponent} from "./product-page/product-page.component";
 import {RegisterPageComponent} from "./register-page/register-page.component";
 import {ProfilePageComponent} from "./profile-page/profile-page.component";
 import {AuthGuard} from "./shared/auth.guard";
+import {AdminGuard} from "./shared/admin.guard";
 
 const routes: Routes = [
   {
@@ -37,7 +38,7 @@ const routes: Routes = [
         ]
       },
       {
-        path: 'admin', loadChildren: () => import('./admin/admin.module').then(m => m.AdminModule)
+        path: 'admin', canActivate: [AuthGuard, AdminGuard], loadChildren: () => import('./admin/admin.module').then(m => m.AdminModule)
       }
     ]
   }]

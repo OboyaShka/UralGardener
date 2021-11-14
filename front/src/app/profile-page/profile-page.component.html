@@ -5,7 +5,7 @@
       <div class="left-menu">
         <a class="menu-item active">Мои данные</a>
         <a class="menu-item">Мои заказы</a>
-        <a class="menu-item">Выйти</a>
+        <a [routerLink]="['/login']" (click)="authService.logout()" class="menu-item">Выйти</a>
       </div>
     </div>
 

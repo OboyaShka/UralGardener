@@ -39,7 +39,8 @@ export class AuthService {
 
     return {
       accessToken: jwt,
-      expiresIn: this.configService.get<string>('JWT_EXPIRES_IN_SECONDS')
+      expiresIn: this.configService.get<string>('JWT_EXPIRES_IN_SECONDS'),
+      userRole: user.role
     }
   }
 

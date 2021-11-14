@@ -41,8 +41,6 @@ const INTERCEPTOR_PROVIDER: Provider = {
   imports: [
     BrowserModule,
     AppRoutingModule,
-    FormsModule,
-    ReactiveFormsModule,
     SharedModule,
   ],
   providers: [INTERCEPTOR_PROVIDER],

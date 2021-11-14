@@ -1,5 +1,5 @@
 import {Component, OnInit} from '@angular/core';
-import {FormBuilder, FormControl, FormGroup, Validators} from "@angular/forms";
+import {FormBuilder, FormGroup, Validators} from "@angular/forms";
 import {AuthService} from "../shared/services/auth.service";
 import {Router} from "@angular/router";
 import {User} from "../shared/interfaces";
@@ -79,8 +79,6 @@ export class ProfilePageComponent implements OnInit {
     this.profileService.getProfile().subscribe((user: User) => {
       this.user = user
       this.createForm()
-
-      console.log(2)
     })
 
 
