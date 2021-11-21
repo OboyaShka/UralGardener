@@ -6,6 +6,17 @@ export interface User {
   fio?: string
 }
 
+export interface Category {
+  _id?: string
+  title: string
+}
+
+export interface Division {
+  _id?: string
+  title: string
+  category_id: string
+}
+
 export interface AuthResponse {
   accessToken: string
   expiresIn: string
