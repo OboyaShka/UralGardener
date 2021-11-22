@@ -1,0 +1,40 @@
+<div class="create-container">
+
+  <h2>Создание категории</h2>
+
+  <form [formGroup]="form" (ngSubmit)="submit()">
+
+    <div
+      class="form-control"
+      [ngClass]="{invalid: form.get('name')?.touched && form.get('name')?.invalid}"
+    >
+      <label for="phone">Название: </label>
+      <input id="phone" placeholder="Введите название категории" type="name" formControlName="name">
+      <div
+        *ngIf="form.get('name')?.touched && form.get('name')?.invalid; else temp"
+        class="validation"
+      >
+        <small
+          *ngIf="form.get('name')?.errors?.required"
+        >Введите категорию</small>
+      </div>
+
+    </div>
+
+    <div class="center button-container">
+      <button
+        type="submit"
+        class="btn"
+        [disabled]="form.invalid"
+      >Создать
+      </button>
+    </div>
+
+
+  </form>
+
+  <ng-template #temp>
+    <div class="validation"></div>
+  </ng-template>
+
+</div>

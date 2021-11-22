@@ -1,0 +1,181 @@
+<div class="create-container">
+
+  <h2>Создание позиции</h2>
+
+  <form [formGroup]="form" (ngSubmit)="submit()">
+
+
+    <div
+      class="form-control">
+      <label for="category_id">Категория: </label>
+      <select id="category_id" [(ngModel)]="selected_category" formControlName="category_id" (change)="selectCategory(selected_category)" >
+        <option [ngValue]="null" placeholder="Выберите категорию...">Выберите категорию...</option>
+        <option *ngFor="let category of categories" [ngValue]="category._id">{{category.title}}</option>
+      </select>
+
+    </div>
+    <div
+      class="form-control">
+      <label for="division_id">Подразделение: </label>
+      <select
+        id="division_id"
+        [(ngModel)]="selected_division"
+        formControlName="division_id"
+        (change)="selectDivision(selected_division)"
+        [attr.disabled]="divisions.length === 0 ? '' : null">
+        <option [ngValue]="null" placeholder="Выберите подразделение...">Выберите подразделение...</option>
+        <option *ngFor="let division of divisions" [ngValue]="division._id">{{division.title}}</option>
+      </select>
+
+    </div>
+    <div
+      class="form-control">
+      <label for="position_id">Позиция: </label>
+      <select id="position_id"
+              [(ngModel)]="selected_position"
+              formControlName="position_id"
+              [attr.disabled]="positions.length === 0  ? '' : null">
+        <option [ngValue]="null" placeholder="Выберите позицию...">Выберите позицию...</option>
+        <option *ngFor="let position of positions" [ngValue]="position._id">{{position.title}}</option>
+      </select>
+
+    </div>
+
+
+
+    <div
+      class="form-control"
+      [ngClass]="{invalid: form.get('title')?.touched && form.get('title')?.invalid}"
+    >
+      <label for="phone">Название: </label>
+      <input id="phone" placeholder="Введите название позиции" type="name" formControlName="title">
+      <div
+        *ngIf="form.get('title')?.touched && form.get('title')?.invalid; else temp"
+        class="validation"
+      >
+        <small
+          *ngIf="form.get('title')?.errors?.required"
+        >Введите позицию</small>
+      </div>
+    </div>
+
+    <div
+      class="form-control"
+      [ngClass]="{invalid: form.get('description')?.touched && form.get('description')?.invalid}"
+    >
+      <label for="description">Описание продукта: </label>
+      <textarea id="description" placeholder="Введите описание продукта" type="description" formControlName="description"></textarea>
+      <div
+        *ngIf="form.get('description')?.touched && form.get('description')?.invalid; else temp"
+        class="validation"
+      >
+        <small
+          *ngIf="form.get('description')?.errors?.required"
+        >Введите описание</small>
+      </div>
+    </div>
+
+    <div
+      class="form-control"
+      [ngClass]="{invalid: form.get('description')?.touched && form.get('description')?.invalid}"
+    >
+      <label for="price">Цена продукта: </label>
+      <input id="price" placeholder="Введите цену продукта" type="text" formControlName="price">
+      <div
+        *ngIf="form.get('price')?.touched && form.get('price')?.invalid; else temp"
+        class="validation"
+      >
+        <small
+          *ngIf="form.get('price')?.errors?.required"
+        >Введите цену продукта</small>
+      </div>
+    </div>
+
+    <div
+      class="form-control"
+      [ngClass]="{invalid: form.get('description')?.touched && form.get('description')?.invalid}"
+    >
+      <label for="article_number">Артикул: </label>
+      <input id="article_number" placeholder="Введите артикул продукта" type="text" formControlName="article_number">
+      <div
+        *ngIf="form.get('article_number')?.touched && form.get('article_number')?.invalid; else temp"
+        class="validation"
+      >
+        <small
+          *ngIf="form.get('article_number')?.errors?.required"
+        >Введите артикул продутка</small>
+      </div>
+    </div>
+
+    <div
+      class="form-control"
+      [ngClass]="{invalid: form.get('description')?.touched && form.get('description')?.invalid}"
+    >
+      <label for="product_count">Количество: </label>
+      <input id="product_count" placeholder="Введите количество продукта" type="text" formControlName="product_count">
+      <div
+        *ngIf="form.get('product_count')?.touched && form.get('product_count')?.invalid; else temp"
+        class="validation"
+      >
+        <small
+          *ngIf="form.get('product_count')?.errors?.required"
+        >Введите количество продутка</small>
+      </div>
+    </div>
+
+    <div
+      class="form-control"
+      [ngClass]="{invalid: form.get('description')?.touched && form.get('description')?.invalid}"
+    >
+      <label for="packing">Фасовка: </label>
+      <input id="packing" placeholder="Введите фасовку продукта" type="text" formControlName="packing">
+      <div
+        *ngIf="form.get('packing')?.touched && form.get('packing')?.invalid; else temp"
+        class="validation"
+      >
+        <small
+          *ngIf="form.get('packing')?.errors?.required"
+        >Введите фасовку продутка</small>
+      </div>
+    </div>
+
+    <div
+      class="form-control"
+
+    >
+      <div class="form-image">
+        <input
+          type="file"
+          class="dn"
+          (change)="onFileUpload($event)"
+          #input
+        >
+        <button
+          class="btn"
+          (click)="triggerClick()"
+        >
+          Загрузить изображение
+        </button>
+
+        <img  class="image-preload" *ngIf="imagePreview" [src]="imagePreview" alt="image_preload">
+
+      </div>
+    </div>
+
+
+    <div class="center button-container">
+      <button
+        type="submit"
+        class="btn"
+        [disabled]="form.invalid"
+      >Создать
+      </button>
+    </div>
+
+  </form>
+
+  <ng-template #temp>
+    <div class="validation"></div>
+  </ng-template>
+
+</div>
