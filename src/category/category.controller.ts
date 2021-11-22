@@ -1,5 +1,4 @@
 import {Body, Controller, Post, Get} from "@nestjs/common";
-import {Product} from "../products/schemas/product.schemas";
 import {createCategoryDto} from "./dto/create-category.dto";
 import {CategoryService} from "./category.service";
 import {Category} from "./schemas/category.schemas";

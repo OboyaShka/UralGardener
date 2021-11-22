@@ -42,7 +42,6 @@ export class AuthController {
   @UseGuards(AuthGuard('jwt'))
   @Get('refresh')
   async refresh(@Request() req) {
-    console.log(req)
     const user = await this.userService.find(req.user.id)
     return this.authService.login(user)
   }

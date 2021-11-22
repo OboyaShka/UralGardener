@@ -17,5 +17,12 @@ export class DivisionService {
     return this.http.post<Division>(`${environment.url}/division/create`, division)
   }
 
+  getAllDivision(): Observable<Division[]> {
+    return this.http.get<Division[]>(`${environment.url}/division/get`)
+  }
+
+  getDivisionsByCategoryId(id: string | null): Observable<any>  {
+    return this.http.get<Division[]>(`${environment.url}/division/get?category_id=${id}`)
+  }
 
 }

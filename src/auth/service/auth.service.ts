@@ -32,8 +32,15 @@ export class AuthService {
     return jwtDecode._id
   }
 
+  // @ts-ignore
+  async decodeTokenRole(token: string): Promise<string> {
+    const jwtDecode = await this.jwtService.decode(token)
+    // @ts-ignore
+    return jwtDecode.role
+  }
+
   async login(user: UserDto) {
-    const payload = { _id: user._id }
+    const payload = { _id: user._id, role: user.role }
     const jwt = this.jwtService.sign(payload)
     let jwtDecode = this.jwtService.decode(this.jwtService.sign(payload))
 

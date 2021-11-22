@@ -104,7 +104,12 @@ h2 {
   }
 }
 
+.dn {
+  display: none;
+}
+
 input[type='tel'],
+input[type='text'],
 input[type='email'],
 input[type='password'],
 input[type='date'],
@@ -114,6 +119,17 @@ select,
 textarea {
   display: block;
   width: 100%;
+  margin-top: .4rem;
+  padding: 0.6rem  0.6rem  0.4rem 0.6rem ;
+  font-size: 18px;
+  border: 1px solid #000;
+}
+
+
+textarea[type='description'] {
+  display: block;
+  width: 100%;
+  height: 200px;
   margin-top: .4rem;
   padding: 0.6rem  0.6rem  0.4rem 0.6rem ;
   font-size: 18px;
@@ -145,6 +161,7 @@ textarea {
   outline: none;
   filter: drop-shadow(0px 4px 4px rgba(0, 0, 0, 0.25));
   border-radius: 10px;
+  height: 40px;
 
   &:disabled {
     cursor: not-allowed;
@@ -231,4 +248,14 @@ textarea {
   opacity: 0.9;
   background: var(--red-color);
   color: #FFFFFF;
+}
+
+.form-image {
+  display: flex;
+  justify-content: space-between;
+}
+
+.image-preload {
+
+  width: 200px;
 }
