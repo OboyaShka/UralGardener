@@ -21,12 +21,12 @@ export class PositionService {
 
   async getPosition(query: any): Promise<Position[]> {
 
-    if (query.category_id) {
-      this.filter.category_id = query.category_id
+    if (query.category_uniq) {
+      this.filter.category_uniq = query.category_uniq
     }
 
-    if (query.division_id) {
-      this.filter.division_id = query.division_id
+    if (query.division_uniq) {
+      this.filter.division_uniq = query.division_uniq
     }
 
     return this.positionModule.find(this.filter).exec()

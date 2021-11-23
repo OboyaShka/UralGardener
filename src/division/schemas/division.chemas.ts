@@ -12,6 +12,12 @@ export class Division {
   @Prop()
   category_id: string
 
+  @Prop()
+  category_uniq: string
+
+  @Prop()
+  uniq_name: string
 }
+
 
 export const DivisionSchemas = SchemaFactory.createForClass(Division)

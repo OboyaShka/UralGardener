@@ -11,29 +11,34 @@ export interface User {
 export interface Category {
   _id?: string
   title: string
+  uniq_name: string
+  image?: string
 }
 
 export interface Division {
   _id?: string
   title: string
-  category_id: string
+  uniq_name: string
+  category_uniq: string
 }
 
 export interface Position {
   _id?: string
   title: string
-  category_id: string
-  division_id: string
+  category_uniq: string
+  division_uniq: string
+  uniq_name: string
 }
 
 export interface Product {
   _id?: string
   title: string
-  category_id: string | null
-  division_id: string | null
-  position_id: string | null
+  uniq_name: string
+  category_uniq: string | null
+  division_uniq: string | null
+  position_uniq: string | null
   description: string
-  article_number: string
+  article_number: number
   packing: string
   packing_type?: string
   price: number

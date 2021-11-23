@@ -21,6 +21,52 @@
 
     </div>
 
+    <div
+      class="form-control"
+      [ngClass]="{invalid: form.get('name')?.touched && form.get('name')?.invalid}"
+    >
+      <label for="uniq_name">Уникальный идентификатор: </label>
+      <input id="uniq_name" placeholder="Введите идентификатор латинскими буквами" type="name" formControlName="uniq_name">
+      <div
+        *ngIf="form.get('uniq_name')?.touched && form.get('uniq_name')?.invalid; else temp"
+        class="validation"
+      >
+        <small
+          *ngIf="form.get('uniq_name')?.errors?.required"
+        >Введите уникальный идентификатор</small>
+
+        <small
+          *ngIf="form.get('uniq_name')?.errors?.pattern"
+        >Используйте латинский алфавит</small>
+      </div>
+
+    </div>
+
+
+    <div
+      class="form-control"
+
+    >
+      <div class="form-image">
+        <input
+          type="file"
+          class="dn"
+          (change)="onFileUpload($event)"
+          #inputImage
+        >
+        <button
+          type="button"
+          class="btn"
+          (click)="triggerClick()"
+        >
+          Загрузить изображение
+        </button>
+
+        <img  class="image-preload" *ngIf="imagePreview" [src]="imagePreview" alt="image_preload">
+
+      </div>
+    </div>
+
     <div class="center button-container">
       <button
         type="submit"

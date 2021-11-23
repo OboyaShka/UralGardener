@@ -20,8 +20,8 @@ export class DivisionService {
 
   async getDivision(query: any): Promise<Division[]> {
 
-    if (query.category_id) {
-      this.filter.category_id = query.category_id
+    if (query.category_uniq) {
+      this.filter.category_uniq = query.category_uniq
     }
 
     return this.divisionModule.find(this.filter).exec()

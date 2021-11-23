@@ -10,10 +10,13 @@ export class Position {
   title: string
 
   @Prop()
-  category_id: string
+  category_uniq: string
 
   @Prop()
-  division_id: string
+  division_uniq: string
+
+  @Prop()
+  uniq_name: string
 
 }
 

@@ -50,6 +50,7 @@ export class CreateProductComponent implements OnInit {
       article_number: [null, Validators.required],
       product_count: [null, Validators.required],
       packing: [null, Validators.required],
+      uniq_name: [null, [Validators.pattern('^[A-Za-z0-9ñÑáéíóúÁÉÍÓÚ ]+$'), Validators.required]]
     })
   }
 
@@ -70,7 +71,7 @@ export class CreateProductComponent implements OnInit {
     this.selected_division = null
     this.selected_position = null
 
-    this.divisionService.getDivisionsByCategoryId(selected_category).subscribe((res) => {
+    this.divisionService.getDivisionsByCategoryUniq(selected_category).subscribe((res) => {
       this.divisions = res
     })
   }
@@ -81,7 +82,7 @@ export class CreateProductComponent implements OnInit {
 
     this.selected_position = null
 
-    this.positionService.getPositionsByDivisionId(selected_division).subscribe((res) => {
+    this.positionService.getPositionsByDivisionUniq(selected_division).subscribe((res) => {
       this.positions = res
     })
   }
@@ -95,13 +96,14 @@ export class CreateProductComponent implements OnInit {
     if (this.image) {
       this.fileService.sendImage(this.image).subscribe((imgUrl) => {
         let product: Product = {
-          article_number: this.form.value.title,
-          category_id: this.selected_category,
+          uniq_name: this.form.value.uniq_name.toLowerCase().replace(/\s/g, "-"),
+          article_number: this.form.value.article_number,
+          category_uniq: this.selected_category,
           count: this.form.value.product_count,
           description: this.form.value.description,
-          division_id: this.selected_division,
+          division_uniq: this.selected_division,
           packing: this.form.value.packing,
-          position_id: this.selected_position,
+          position_uniq: this.selected_position,
           price: this.form.value.price,
           title: this.form.value.title,
           image: imgUrl.url
@@ -109,7 +111,7 @@ export class CreateProductComponent implements OnInit {
 
         console.log(product)
 
-        this.productService.createPosition(product).subscribe(() => {
+        this.productService.createProduct(product).subscribe(() => {
           this.form.reset()
           this.form.reset()
           this.image = null
@@ -121,18 +123,19 @@ export class CreateProductComponent implements OnInit {
       })
     } else {
       let product: Product = {
-        article_number: this.form.value.title,
-        category_id: this.selected_category,
+        uniq_name: this.form.value.uniq_name.toLowerCase().replace(/\s/g, "-"),
+        article_number: this.form.value.article_number,
+        category_uniq: this.selected_category,
         count: this.form.value.product_count,
         description: this.form.value.description,
-        division_id: this.selected_division,
+        division_uniq: this.selected_division,
         packing: this.form.value.packing,
-        position_id: this.selected_position,
+        position_uniq: this.selected_position,
         price: this.form.value.price,
         title: this.form.value.title,
       }
 
-      this.productService.createPosition(product).subscribe(() => {
+      this.productService.createProduct(product).subscribe(() => {
         this.form.reset()
         this.image = null
         this.imagePreview = ''

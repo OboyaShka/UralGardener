@@ -9,6 +9,12 @@ export class Category {
   @Prop()
   title: string
 
+  @Prop()
+  uniq_name: string
+
+  @Prop()
+  image: string
+
 }
 
 export const CategorySchemas = SchemaFactory.createForClass(Category)

@@ -17,4 +17,11 @@ export class ProductController {
     return this.productService.create(productDto)
   }
 
+  @Get('get')
+  getPosition(@Query() query): Promise<Position[]> {
+    return this.productService.getProducts(query)
+  }
+
+
+
 }

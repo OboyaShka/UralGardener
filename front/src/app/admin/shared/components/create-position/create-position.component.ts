@@ -27,7 +27,8 @@ export class CreatePositionComponent implements OnInit {
   createForm() {
     this.form = this.fb.group({
         name: [null, Validators.required],
-        division_id: [null, Validators.required]
+        division_uniq: [null, Validators.required],
+        uniq_name: [null, [Validators.pattern('^[A-Za-z0-9ñÑáéíóúÁÉÍÓÚ ]+$'), Validators.required]]
       }
     )
   }
@@ -52,13 +53,13 @@ export class CreatePositionComponent implements OnInit {
     }
 
     // @ts-ignore
-    let categoryId = this.divisions.find(division => division._id === this.form.value.division_id).category_id
+    let categoryUniq = this.divisions.find(division => division.uniq_name === this.form.value.division_uniq).category_uniq
 
     let position: Position = {
       title: this.form.value.name,
-      division_id: this.form.value.division_id,
-      category_id: categoryId
-
+      division_uniq: this.form.value.division_uniq,
+      category_uniq: categoryUniq,
+      uniq_name: this.form.value.uniq_name.toLowerCase().replace(/\s/g, "-"),
     }
 
     this.positionService.createPosition(position).subscribe(() => {

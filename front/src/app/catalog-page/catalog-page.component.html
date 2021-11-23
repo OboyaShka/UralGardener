@@ -1,3 +1,69 @@
-<p>catalog-page works!</p>
+<h2>{{currentTitle}}</h2>
+<div *ngIf="categories && isCatalog">
+  <div class="card" *ngFor="let category of categories" (click)="goToCategory(category)">
+    <p>{{category.title}}</p>
+    <img [src]="env.url+ '/' + category.image" alt="">
+  </div>
+</div>
+<div class="flex-catalog">
+  <div class="catalog-options" *ngIf="!isCatalog">
+    <div class="option-header">
+      <h4>Каталог</h4>
+    </div>
+    <hr>
+    <div class="option-body">
+      <ul *ngIf="categoriesOptions">
+        <li *ngFor="let category of categoriesOptions; let index = index">
+          <div class="option-item" >
+            <img [src]="category.divisionFlag?'assets/icons/option_arrow_g.svg':'assets/icons/option_arrow.svg'" (click)="openCategory(category, index)">
+            <p (click)="setLeaf(null)" (click)="setProduct(category, 'category')" [routerLink]="['/catalog', category.uniq_name]">{{category.title.toUpperCase()}}</p>
+          </div>
+          <ul *ngIf="category.divisionFlag">
+            <li *ngFor="let division of category.divisions; let indexD = index">
+              <div class="option-item option-division"  >
+                <img [src]="division.positionFlag?'assets/icons/option_arrow_g.svg':'assets/icons/option_arrow.svg'" (click)="openDivision(division, index , indexD)">
+                <p (click)="setLeaf(null)" (click)="setProduct(division, 'division')" [routerLink]="['/catalog', category.uniq_name , division.uniq_name]">{{division.title}}</p>
+              </div>
+              <ul  *ngIf="division.positionFlag">
+                <li  *ngFor="let position of division.positions; let indexP = index">
+                  <div class="option-item option-position">
+                    <div class="option-leaf" >
+                      <img *ngIf="productFlag === position.uniq_name" src="assets/icons/option_leaf.svg" >
+                    </div>
+                    <p (click)="setProduct(position, 'position')" [routerLink]="['/catalog', category.uniq_name , division.uniq_name, position.uniq_name]" (click)="setLeaf(position)">{{position.title}}</p>
+                  </div>
+                </li>
+              </ul>
+            </li>
+          </ul>
+        </li>
+      </ul>
+    </div>
 
-<router-outlet></router-outlet>
+  </div>
+
+  <div *ngIf="products" class="catalog-shop">
+    <div *ngFor="let product of products" class="shop-card">
+      <img class="card-img" [src]="env.url + '/' + product.image">
+      <p class="card-text">{{product.title}}</p>
+      <div class="card-price">
+        <var>{{product.price}} рублей</var>
+        <span>Фасовка: {{product.packing}}</span>
+      </div>
+      <div class="card-buttons">
+        <div class="card-add">
+          <i>-</i>
+          <span>0</span>
+          <i>+</i>
+        </div>
+        <button class="card-buy">Купить</button>
+      </div>
+    </div>
+
+
+  </div>
+
+
+<!--  <router-outlet></router-outlet>-->
+</div>
+

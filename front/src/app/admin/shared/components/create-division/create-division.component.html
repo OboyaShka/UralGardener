@@ -10,7 +10,7 @@
       <label for="category">Категория: </label>
       <select id="category" [(ngModel)]="selected" formControlName="category">
         <option [ngValue]="null" placeholder="Выберите категорию...">Выберите категорию...</option>
-        <option *ngFor="let category of categories" [ngValue]="category._id">{{category.title}}</option>
+        <option *ngFor="let category of categories" [ngValue]="category.uniq_name">{{category.title}}</option>
       </select>
 
     </div>
@@ -32,7 +32,26 @@
       </div>
     </div>
 
+    <div
+      class="form-control"
+      [ngClass]="{invalid: form.get('name')?.touched && form.get('name')?.invalid}"
+    >
+      <label for="uniq_name">Уникальный идентификатор: </label>
+      <input id="uniq_name" placeholder="Введите идентификатор латинскими буквами" type="name" formControlName="uniq_name">
+      <div
+        *ngIf="form.get('uniq_name')?.touched && form.get('uniq_name')?.invalid; else temp"
+        class="validation"
+      >
+        <small
+          *ngIf="form.get('uniq_name')?.errors?.required"
+        >Введите уникальный идентификатор</small>
 
+        <small
+          *ngIf="form.get('uniq_name')?.errors?.pattern"
+        >Используйте латинский алфавит</small>
+      </div>
+
+    </div>
 
     <div class="center button-container">
       <button

@@ -7,10 +7,10 @@
 
     <div
       class="form-control">
-      <label for="division_id">Подразделение: </label>
-      <select id="division_id" [(ngModel)]="selected" formControlName="division_id">
+      <label for="division_uniq">Подразделение: </label>
+      <select id="division_uniq" [(ngModel)]="selected" formControlName="division_uniq">
         <option [ngValue]="null" placeholder="Выберите подразделение...">Выберите подразделение...</option>
-        <option *ngFor="let division of divisions" [ngValue]="division._id">{{division.title}}</option>
+        <option *ngFor="let division of divisions" [ngValue]="division.uniq_name">{{division.title}}</option>
       </select>
 
     </div>
@@ -31,6 +31,28 @@
           *ngIf="form.get('name')?.errors?.required"
         >Введите позицию</small>
       </div>
+    </div>
+
+
+    <div
+      class="form-control"
+      [ngClass]="{invalid: form.get('name')?.touched && form.get('name')?.invalid}"
+    >
+      <label for="uniq_name">Уникальный идентификатор: </label>
+      <input id="uniq_name" placeholder="Введите идентификатор латинскими буквами" type="name" formControlName="uniq_name">
+      <div
+        *ngIf="form.get('uniq_name')?.touched && form.get('uniq_name')?.invalid; else temp"
+        class="validation"
+      >
+        <small
+          *ngIf="form.get('uniq_name')?.errors?.required"
+        >Введите уникальный идентификатор</small>
+
+        <small
+          *ngIf="form.get('uniq_name')?.errors?.pattern"
+        >Используйте латинский алфавит</small>
+      </div>
+
     </div>
 
     <div class="center button-container">

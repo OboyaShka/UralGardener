@@ -28,7 +28,8 @@ export class CreateDivisionComponent implements OnInit {
   createForm(){
     this.form = this.fb.group({
       name: [null, [Validators.required]],
-      category: [null, [Validators.required]]
+      category: [null, [Validators.required]],
+      uniq_name: [null, [Validators.pattern('^[A-Za-z0-9ñÑáéíóúÁÉÍÓÚ ]+$'), Validators.required]]
     })
   }
 
@@ -37,6 +38,7 @@ export class CreateDivisionComponent implements OnInit {
 
     this.categoryServices.getAllCategories().subscribe((res) => {
       this.categories = res
+      console.log(res)
     })
   }
 
@@ -47,7 +49,8 @@ export class CreateDivisionComponent implements OnInit {
 
     let division: Division = {
       title: this.form.value.name,
-      category_id: this.form.value.category
+      category_uniq: this.form.value.category,
+      uniq_name: this.form.value.uniq_name.toLowerCase().replace(/\s/g, "-"),
     }
 
 

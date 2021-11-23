@@ -10,7 +10,7 @@
       <label for="category_id">Категория: </label>
       <select id="category_id" [(ngModel)]="selected_category" formControlName="category_id" (change)="selectCategory(selected_category)" >
         <option [ngValue]="null" placeholder="Выберите категорию...">Выберите категорию...</option>
-        <option *ngFor="let category of categories" [ngValue]="category._id">{{category.title}}</option>
+        <option *ngFor="let category of categories" [ngValue]="category.uniq_name">{{category.title}}</option>
       </select>
 
     </div>
@@ -24,7 +24,7 @@
         (change)="selectDivision(selected_division)"
         [attr.disabled]="divisions.length === 0 ? '' : null">
         <option [ngValue]="null" placeholder="Выберите подразделение...">Выберите подразделение...</option>
-        <option *ngFor="let division of divisions" [ngValue]="division._id">{{division.title}}</option>
+        <option *ngFor="let division of divisions" [ngValue]="division.uniq_name">{{division.title}}</option>
       </select>
 
     </div>
@@ -36,7 +36,7 @@
               formControlName="position_id"
               [attr.disabled]="positions.length === 0  ? '' : null">
         <option [ngValue]="null" placeholder="Выберите позицию...">Выберите позицию...</option>
-        <option *ngFor="let position of positions" [ngValue]="position._id">{{position.title}}</option>
+        <option *ngFor="let position of positions" [ngValue]="position.uniq_name">{{position.title}}</option>
       </select>
 
     </div>
@@ -141,6 +141,27 @@
 
     <div
       class="form-control"
+      [ngClass]="{invalid: form.get('name')?.touched && form.get('name')?.invalid}"
+    >
+      <label for="uniq_name">Уникальный идентификатор: </label>
+      <input id="uniq_name" placeholder="Введите идентификатор латинскими буквами" type="name" formControlName="uniq_name">
+      <div
+        *ngIf="form.get('uniq_name')?.touched && form.get('uniq_name')?.invalid; else temp"
+        class="validation"
+      >
+        <small
+          *ngIf="form.get('uniq_name')?.errors?.required"
+        >Введите уникальный идентификатор</small>
+
+        <small
+          *ngIf="form.get('uniq_name')?.errors?.pattern"
+        >Используйте латинский алфавит</small>
+      </div>
+
+    </div>
+
+    <div
+      class="form-control"
 
     >
       <div class="form-image">
@@ -151,6 +172,7 @@
           #input
         >
         <button
+          type="button"
           class="btn"
           (click)="triggerClick()"
         >

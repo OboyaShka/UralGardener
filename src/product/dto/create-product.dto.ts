@@ -1,11 +1,12 @@
 export class createProductDto {
   readonly _id?: string
   readonly title: string
-  readonly category_id: string | null
-  readonly division_id: string | null
-  readonly position_id: string | null
+  readonly category_uniq: string | null
+  readonly division_uniq: string | null
+  readonly position_uniq: string | null
+  readonly uniq_name: string
   readonly description: string
-  readonly article_number: string
+  readonly article_number: number
   readonly packing: string
   readonly packing_type?: string
   readonly price: number

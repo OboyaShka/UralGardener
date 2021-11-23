@@ -86,6 +86,13 @@ h2 {
   margin-bottom: 20px;
 }
 
+h4 {
+  font-style: normal;
+  font-weight: 600;
+  font-size: 24px;
+  line-height: 33px;
+}
+
 .form-control {
   margin-bottom: 20px;
   display: block;
@@ -258,4 +265,167 @@ textarea[type='description'] {
 .image-preload {
 
   width: 200px;
+}
+
+.flex-catalog {
+  display: flex;
+  align-items: flex-start;
+}
+
+.catalog-options {
+  font-family: a_FuturaRoundDemi;
+  font-style: normal;
+  font-weight: normal;
+  font-size: 20px;
+  line-height: 24px;
+  background: #FFFFFF;
+  border: 1px solid #505050;
+  border-radius: 10px;
+  width: 300px;
+
+}
+
+.catalog-options hr{
+  margin: 0;
+  color:  #505050; /*для IE */
+  background-color:#555; /*для Firefox, Opera, Safari*/
+  border:0px none;
+  height:1px; /* высота 1px IE, Firefox, Opera, Safari */
+  clear:both; /* для очистки, если тег идет после float елемента */
+}
+
+.catalog-options img {
+  cursor: pointer;
+}
+
+.catalog-options p {
+  cursor: pointer;
+}
+
+.option-header {
+  display: flex;
+  justify-content: center;
+  padding: 10px 10px;
+}
+
+.option-body{
+  padding: 5px 30px
+}
+
+.option-item {
+  display: flex;
+  align-items: center;
+  height: 30px;
+}
+
+.option-division {
+  margin-left: 30px;
+}
+.option-position {
+  margin-left: 60px;
+}
+
+.option-leaf {
+  width: 18px;
+}
+
+.catalog-shop {
+  width: 100%;
+  padding-left: 30px;
+  display: grid;
+  grid-template-columns: 1fr 1fr 1fr;
+  grid-gap: 2vw;
+}
+
+.shop-card {
+  width: 270px;
+  height: 426px;
+  background: #FFFFFF;
+  border: 2px solid #505050;
+  box-sizing: border-box;
+  box-shadow: 0px 4px 4px rgba(0, 0, 0, 0.25);
+  border-radius: 10px;
+  display: grid;
+  grid-template-rows: 10fr 2fr 1fr 2fr;
+  padding: 10px;
+}
+
+.card-img {
+  border-radius: 10px;
+  object-fit:cover;
+  height: 300px;
+  width: 100%;
+}
+
+.card-text {
+  display: flex;
+  align-items: center;
+  text-align: center;
+  font-family: a_FuturaRoundDemi;
+  font-style: normal;
+  font-weight: normal;
+  font-size: 15px;
+  line-height: 18px;
+  letter-spacing: 0.05em;
+  color: #4E4E4E;
+  padding: 0px 5px
+}
+
+.card-price {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 0px 5px
+}
+
+.card-price var {
+  font-family: a_FuturaRoundDemi;
+  font-style: normal;
+  font-weight: normal;
+  font-size: 15px;
+  line-height: 18px;
+  color: #000000;
+}
+
+.card-price span {
+  font-family: a_FuturaRound;
+  font-style: normal;
+  font-weight: normal;
+  font-size: 15px;
+  line-height: 18px;
+  display: flex;
+  letter-spacing: 0.05em;
+  color: #4E4E4E;
+}
+
+
+.card-buy {
+  background: #B5D105;
+  box-shadow: 0px 4px 4px rgba(0, 0, 0, 0.35);
+  border-radius: 5px;
+  font-family: a_FuturaRound;
+  font-style: normal;
+  font-weight: normal;
+  font-size: 12px;
+  line-height: 15px;
+  width: 88px;
+  height: 30px;
+  color: #000000;
+}
+
+.card-buttons {
+  align-items: center;
+  display: flex;
+  justify-content: space-between;
+  padding: 0px 5px
+}
+
+.card-add {
+  background: #FFFFFF;
+  border: 1px solid #505050;
+  width: 125px;
+  height: 30px;
+  display: flex;
+  align-items: center;
+  justify-content: space-around;
 }

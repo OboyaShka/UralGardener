@@ -10,19 +10,19 @@ export class Product {
   title: string
 
   @Prop()
-  category_id: string
+  category_uniq: string
 
   @Prop()
-  division_id: string
+  division_uniq: string
 
   @Prop()
-  position_id: string
+  position_uniq: string
 
   @Prop()
   description: string
 
   @Prop()
-  article_number: string
+  article_number: number
 
   @Prop()
   packing: string
@@ -38,6 +38,9 @@ export class Product {
 
   @Prop()
   count: number
+
+  @Prop()
+  uniq_name: string
 
   @Prop()
   image?: string
