@@ -93,18 +93,17 @@ export class CatalogPageComponent implements OnInit {
 
     switch (type) {
       case 'category':
-        this.productService.getAllProducts(object.uniq_name).subscribe((products: Product[]) => {
+        this.productService.getProductByCategory(object.uniq_name).subscribe((products: Product[]) => {
           this.products = products
-          console.log(products)
         })
         break
       case 'division':
-        this.productService.getAllProducts(null, object.uniq_name).subscribe((products: Product[]) => {
+        this.productService.getProductByDivision(object.uniq_name).subscribe((products: Product[]) => {
           this.products = products
         })
         break
       case 'position':
-        this.productService.getAllProducts(null, null, object.uniq_name).subscribe((products: Product[]) => {
+        this.productService.getProductByPosition(object.uniq_name).subscribe((products: Product[]) => {
           this.products = products
         })
         break

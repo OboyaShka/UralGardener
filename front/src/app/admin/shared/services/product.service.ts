@@ -18,5 +18,16 @@ export class ProductService {
     return this.http.get<Product[]>(`${environment.url}/product/get?${category ? 'category_uniq=' + category : ""}${division ? '&division_uniq=' + division : ""}${position ? '&position_uniq=' + position : ""}`)
   }
 
+  getProductByCategory(category: string | null = null): Observable<Product[]> {
+    return this.http.get<Product[]>(`${environment.url}/product/get?${category ? 'category_uniq=' + category : ""}`)
+  }
+
+  getProductByDivision(division: string | null = null): Observable<Product[]> {
+    return this.http.get<Product[]>(`${environment.url}/product/get?${division ? 'division_uniq=' + division : ""}`)
+  }
+
+  getProductByPosition(position: string | null = null): Observable<Product[]> {
+    return this.http.get<Product[]>(`${environment.url}/product/get?${position ? 'position_uniq=' + position : ""}`)
+  }
 
 }

@@ -21,7 +21,7 @@ export class ProductService {
 
   async getProducts (query: any): Promise<Position[]> {
 
-
+    this.filter = {}
 
     if (query.category_uniq) {
       this.filter.category_uniq = query.category_uniq
