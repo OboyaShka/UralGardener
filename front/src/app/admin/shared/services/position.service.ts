@@ -25,4 +25,8 @@ export class PositionService {
     return this.http.get<Position[]>(`${environment.url}/position/get?division_uniq=${id}`)
   }
 
+  getPositionsByUniqName(id: string | null): Observable<Position[]> {
+    return this.http.get<Position[]>(`${environment.url}/position/get?uniq_name=${id}`)
+  }
+
 }

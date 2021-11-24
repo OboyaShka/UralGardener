@@ -1,3 +1,3 @@
-export interface DivisionQueryInterface {
+export interface QueryInterface {
   [k: string]: any
 }

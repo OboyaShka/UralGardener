@@ -25,4 +25,7 @@ export class DivisionService {
     return this.http.get<Division[]>(`${environment.url}/division/get?category_uniq=${id}`)
   }
 
+  getDivisionsByUniqName(id: string | null): Observable<any>  {
+    return this.http.get<Division[]>(`${environment.url}/division/get?uniq_name=${id}`)
+  }
 }

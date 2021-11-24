@@ -3,12 +3,12 @@ import {InjectModel} from "@nestjs/mongoose";
 import {Model} from "mongoose";
 import {createDivisionDto} from "./dto/create-division.dto";
 import {Division, DivisionDocument} from "./schemas/division.chemas";
-import {DivisionQueryInterface} from "./division.interface";
+import {QueryInterface} from "./division.interface";
 
 
 @Injectable()
 export class DivisionService {
-  private filter: DivisionQueryInterface = {};
+  private filter: QueryInterface = {};
 
   constructor(@InjectModel(Division.name) private divisionModule: Model<DivisionDocument>) {
   }
@@ -20,8 +20,14 @@ export class DivisionService {
 
   async getDivision(query: any): Promise<Division[]> {
 
+    this.filter = {}
+
     if (query.category_uniq) {
       this.filter.category_uniq = query.category_uniq
+    }
+
+    if (query.uniq_name) {
+      this.filter.uniq_name = query.uniq_name
     }
 
     return this.divisionModule.find(this.filter).exec()

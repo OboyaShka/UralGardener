@@ -3,14 +3,14 @@ import {PositionQueryInterface} from "../position/position.interface";
 import {InjectModel} from "@nestjs/mongoose";
 import {Position, PositionDocument} from "../position/schemas/position.chemas";
 import {Model} from "mongoose";
-import {createPositionDto} from "../position/dto/create-position.dto";
 import {Product, ProductDocument} from "./schemas/product.schema";
 import {createProductDto} from "./dto/create-product.dto";
+import {QueryInterface} from "../division/division.interface";
 
 @Injectable()
 export class ProductService {
 
-  private filter: PositionQueryInterface = {};
+  private filter: QueryInterface = {};
 
   constructor(@InjectModel(Product.name) private productModule: Model<ProductDocument>) {}
 
@@ -33,6 +33,10 @@ export class ProductService {
 
     if (query.position_uniq) {
       this.filter.position_uniq = query.position_uniq
+    }
+
+    if (query.uniq_name) {
+      this.filter.uniq_name = query.uniq_name
     }
 
 

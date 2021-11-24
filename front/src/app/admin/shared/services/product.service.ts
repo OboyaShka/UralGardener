@@ -30,4 +30,8 @@ export class ProductService {
     return this.http.get<Product[]>(`${environment.url}/product/get?${position ? 'position_uniq=' + position : ""}`)
   }
 
+  getProductByUniqName(uniq_name: string | null = null): Observable<Product[]> {
+    return this.http.get<Product[]>(`${environment.url}/product/get?${uniq_name ? 'uniq_name=' + uniq_name : ""}`)
+  }
+
 }

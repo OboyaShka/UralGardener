@@ -1,7 +1,8 @@
-import {Body, Controller, Post, Get} from "@nestjs/common";
+import {Body, Controller, Post, Get, Query} from "@nestjs/common";
 import {createCategoryDto} from "./dto/create-category.dto";
 import {CategoryService} from "./category.service";
 import {Category} from "./schemas/category.schemas";
+import {QueryInterface} from "../division/division.interface";
 
 @Controller('category')
 export class CategoryController {
@@ -20,6 +21,9 @@ export class CategoryController {
     return this.categoryServices.getAll()
   }
 
-
+  @Get('get')
+  getCategory(@Query() query): Promise<Category[]> {
+    return this.categoryServices.getCategory(query)
+  }
 
 }
