@@ -6,6 +6,11 @@ import {Router, ActivatedRoute} from "@angular/router";
 import {DivisionService} from "../admin/shared/services/division.service";
 import {PositionService} from "../admin/shared/services/position.service";
 import {ProductService} from "../admin/shared/services/product.service";
+import {select, Store} from "@ngrx/store";
+import {CartState} from "../reducers/shopping-cart/shopping-cart.reducer";
+import {CartActions} from "../reducers/shopping-cart/shopping-cart.actions";
+import {Observable} from "rxjs";
+import {selectProducts} from "../reducers/shopping-cart/shopping-cart.selectors";
 
 @Component({
   selector: 'app-catalog-page',
@@ -13,7 +18,6 @@ import {ProductService} from "../admin/shared/services/product.service";
   styleUrls: ['./catalog-page.component.scss']
 })
 export class CatalogPageComponent implements OnInit {
-
   categories: Category[] = []
   categoriesOptions: any
   env = environment
@@ -25,15 +29,18 @@ export class CatalogPageComponent implements OnInit {
   products: Product[] = []
   index: any
   breadCrumbs: any = []
+  public productsCart$: Observable<any> = this.store$.pipe(select(selectProducts))
 
   constructor(
+    private store$: Store<CartState>,
     private route: ActivatedRoute,
     private categoryService: CategoryService,
     private divisionService: DivisionService,
     private positionService: PositionService,
     private productService: ProductService,
     private router: Router
-  ) { }
+  ) {
+  }
 
   @HostListener('window:popstate', ['$event'])
   onPopState() {
@@ -55,7 +62,8 @@ export class CatalogPageComponent implements OnInit {
         case 0:
           break
         case 1:
-          this.breadCrumbs = []
+          this.currentTitle = 'Каталог'
+          this.breadCrumbs = [{title: 'Главная', uniq_name: ''}, {title: 'Каталог', uniq_name: 'catalog'}]
           this.isCatalog = true
           this.isProduct = false
           break
@@ -91,6 +99,7 @@ export class CatalogPageComponent implements OnInit {
               this.divisionService.getDivisionsByUniqName(products[0].division_uniq).subscribe((divisions) => {
                 this.positionService.getPositionsByUniqName(products[0].position_uniq).subscribe((positions) => {
                   this.breadCrumbs = [
+                    {title: 'Главная', uniq_name: ''},
                     {title: 'Каталог', uniq_name: 'catalog'},
                     categories[0],
                     divisions[0],
@@ -125,17 +134,19 @@ export class CatalogPageComponent implements OnInit {
 
 
   goToCategory(category: Category) {
-    this.breadCrumbs.push(
+    this.breadCrumbs = [
+      {title: 'Главная', uniq_name: ''},
       {title: 'Каталог', uniq_name: 'catalog'},
       category
-    )
+    ]
+    this.currentTitle = category.title
 
     this.productService.getAllProducts(category.uniq_name).subscribe((products: Product[]) => {
       this.products = products
     })
 
-      this.isCatalog = false
-    this.router.navigate(['/catalog' , category.uniq_name])
+    this.isCatalog = false
+    this.router.navigate(['/catalog', category.uniq_name])
   }
 
   openCategoryOptions(category: any, index: number) {
@@ -173,7 +184,6 @@ export class CatalogPageComponent implements OnInit {
   }
 
 
-
   setProducts(object: any, type: string) {
     this.currentTitle = object.title
 
@@ -181,6 +191,7 @@ export class CatalogPageComponent implements OnInit {
       case 'category':
 
         this.breadCrumbs = [
+          {title: 'Главная', uniq_name: ''},
           {title: 'Каталог', uniq_name: 'catalog'},
           object
         ]
@@ -192,6 +203,7 @@ export class CatalogPageComponent implements OnInit {
 
         this.categoryService.getCategoryByUniqName(object.category_uniq).subscribe((categories) => {
           this.breadCrumbs = [
+            {title: 'Главная', uniq_name: ''},
             {title: 'Каталог', uniq_name: 'catalog'},
             categories[0],
             object
@@ -207,11 +219,12 @@ export class CatalogPageComponent implements OnInit {
         this.divisionService.getDivisionsByUniqName(object.division_uniq).subscribe((divisions) => {
           this.categoryService.getCategoryByUniqName(divisions[0].category_uniq).subscribe((categories) => {
             this.breadCrumbs = [
+              {title: 'Главная', uniq_name: ''},
               {title: 'Каталог', uniq_name: 'catalog'},
               categories[0],
               divisions[0],
               object
-              ]
+            ]
           })
 
         })
@@ -230,6 +243,7 @@ export class CatalogPageComponent implements OnInit {
       this.divisionService.getDivisionsByUniqName(product.division_uniq).subscribe((divisions) => {
         this.positionService.getPositionsByUniqName(product.position_uniq).subscribe((positions) => {
           this.breadCrumbs = [
+            {title: 'Главная', uniq_name: ''},
             {title: 'Каталог', uniq_name: 'catalog'},
             categories[0],
             divisions[0],
@@ -242,7 +256,7 @@ export class CatalogPageComponent implements OnInit {
 
     this.productService.getProductByUniqName(product.uniq_name).subscribe((product) => {
       this.currentTitle = product[0].title
-      this.router.navigate(['/catalog',product[0].category_uniq,product[0].division_uniq,product[0].position_uniq,product[0].uniq_name])
+      this.router.navigate(['/catalog', product[0].category_uniq, product[0].division_uniq, product[0].position_uniq, product[0].uniq_name])
       this.currentProduct = product[0]
       this.isProduct = true
     })
@@ -257,5 +271,15 @@ export class CatalogPageComponent implements OnInit {
 
     this.router.navigateByUrl(url)
     this.contentInit()
+  }
+
+  buyProduct(product: Product) {
+    this.store$.dispatch(CartActions.increasePrice({increasePrice: 100}))
+    this.store$.dispatch(CartActions.addProduct({
+      productInfo: {
+        count: 1,
+        product: product
+      }
+    }))
   }
 }

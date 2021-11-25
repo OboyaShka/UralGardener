@@ -12,6 +12,7 @@ import {RegisterPageComponent} from "./register-page/register-page.component";
 import {ProfilePageComponent} from "./profile-page/profile-page.component";
 import {AuthGuard} from "./shared/auth.guard";
 import {AdminGuard} from "./shared/admin.guard";
+import {CartPageComponent} from "./cart-page/cart-page.component";
 
 const routes: Routes = [
   {
@@ -20,6 +21,7 @@ const routes: Routes = [
       {path: '', component: MainPageComponent},
       {path: 'login', component: LoginPageComponent},
       {path: 'register', component: RegisterPageComponent},
+      {path: 'cart', component: CartPageComponent},
       {path: 'profile', component: ProfilePageComponent, canActivate: [AuthGuard]},
       {path: 'catalog', component: CatalogPageComponent, children: [
           {

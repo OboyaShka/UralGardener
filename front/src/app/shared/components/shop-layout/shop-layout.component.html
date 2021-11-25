@@ -7,7 +7,7 @@
       <input type="search" placeholder="Поиск товара...">
     </li>
     <li>
-      <a>7260 руб <img src="assets/icons/cart.svg"></a>
+      <a>{{ price$ | async}} руб <img src="assets/icons/cart.svg"></a>
     </li>
     <li>
       <div *ngIf="!authService.isAuthenticated()">
