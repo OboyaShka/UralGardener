@@ -23,8 +23,9 @@ import { environment } from '../environments/environment';
 import { EffectsModule } from '@ngrx/effects';
 import { StoreRouterConnectingModule } from '@ngrx/router-store';
 import {metaReducers, reducers} from "./reducers";
-import {FilterProduct} from "./shared/pipes/filter-cart.pipe";
+import {FilterProduct, getFilterProduct, totalPrice} from "./shared/pipes/filter-cart.pipe";
 import {CartPageComponent} from "./cart-page/cart-page.component";
+import {ShoppingCartEffects} from "./reducers/shopping-cart/shopping-cart.effects";
 
 const INTERCEPTOR_PROVIDER: Provider = {
   provide: HTTP_INTERCEPTORS,
@@ -46,7 +47,9 @@ const INTERCEPTOR_PROVIDER: Provider = {
     RegisterPageComponent,
     ProfilePageComponent,
     CartPageComponent,
-    FilterProduct
+    FilterProduct,
+    getFilterProduct,
+    totalPrice
   ],
   imports: [
     BrowserModule,
@@ -60,7 +63,7 @@ const INTERCEPTOR_PROVIDER: Provider = {
       }
     }),
     StoreDevtoolsModule.instrument({ maxAge: 25, logOnly: environment.production }),
-    EffectsModule.forRoot([]),
+    EffectsModule.forRoot([ShoppingCartEffects]),
     StoreRouterConnectingModule.forRoot(),
   ],
   providers: [INTERCEPTOR_PROVIDER],

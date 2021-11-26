@@ -1,6 +1,6 @@
 import {Component, HostListener, OnInit} from '@angular/core';
 import {CategoryService} from "../admin/shared/services/category.service";
-import {Category, Product} from "../shared/interfaces";
+import {Category, Product, ProductInfo} from "../shared/interfaces";
 import {environment} from "../../environments/environment"
 import {Router, ActivatedRoute} from "@angular/router";
 import {DivisionService} from "../admin/shared/services/division.service";
@@ -274,12 +274,27 @@ export class CatalogPageComponent implements OnInit {
   }
 
   buyProduct(product: Product) {
-    this.store$.dispatch(CartActions.increasePrice({increasePrice: 100}))
     this.store$.dispatch(CartActions.addProduct({
       productInfo: {
-        count: 1,
+        count: product.packing,
         product: product
       }
     }))
+  }
+
+  increaseCount(productInfo: ProductInfo){
+    if (productInfo.count + productInfo.product.packing > productInfo.product.count) {
+      this.store$.dispatch(CartActions.deleteProduct({productInfo: productInfo}))
+    } else {
+      this.store$.dispatch(CartActions.increaseCount({productInfo: productInfo}))
+    }
+  }
+
+  decreaseCount(productInfo: ProductInfo){
+    if (productInfo.count - productInfo.product.packing <= 0) {
+      this.store$.dispatch(CartActions.deleteProduct({productInfo: productInfo}))
+    } else {
+      this.store$.dispatch(CartActions.decreaseCount({productInfo: productInfo}))
+    }
   }
 }

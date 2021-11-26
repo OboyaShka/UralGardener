@@ -1,1 +1,45 @@
-<div>Корзина</div>
+<h2>Моя корзина</h2>
+
+<div  class="card">
+  <div  *ngFor="let productInfo of (productsCart$ | async) as productsCart ">
+    <div class="cart-card">
+      <img class="cart-card__img" [src]="env.url + '/' + productInfo.product.image" alt="">
+      <p
+        [routerLink]="['/catalog', productInfo.product.category_uniq, productInfo.product.division_uniq, productInfo.product.position_uniq, productInfo.product.uniq_name,]"
+        class="cart-card__title"
+      >{{productInfo.product.title}}</p>
+      <span class="cart-card__price">{{productInfo.product.price}} руб</span>
+      <div  class="cart-card__add wrapper-flex-card-add">
+        <div class="flex-card-add">
+          <i (click)="decreaseCount(productInfo)">-</i>
+          <span>{{productInfo.count}}</span>
+          <i (click)="increaseCount(productInfo)">+</i>
+        </div>
+        <span style="color: black">шт.</span>
+      </div>
+      <div class="cart-card__price-all">
+        <b>
+          Сумма: {{productInfo.product.price * productInfo.count}}
+        </b>
+      </div>
+      <div class="cart-card__delete" (click)="deleteProduct(productInfo)">
+        <img src="assets/icons/trash_icon.svg">
+        Удалить
+      </div>
+    </div>
+    <hr>
+  </div>
+  <div>
+    <div class="total-cart">
+      <div class="total-sale" >
+        <input placeholder="Введите купон при наличии"  type="text">
+
+      </div>
+      <div class="total-price">
+        <b>Итоговая цена: {{productsCart$ | async | totalPrice}}</b>
+        <b>Цена со скидкой: {{productsCart$ | async | totalPrice}}</b>
+      </div>
+      <button class="btn-medium btn">Оформить заказ</button>
+    </div>
+  </div>
+</div>

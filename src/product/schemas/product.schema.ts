@@ -25,7 +25,7 @@ export class Product {
   article_number: number
 
   @Prop()
-  packing: string
+  packing: number
 
   @Prop()
   packing_type?: string

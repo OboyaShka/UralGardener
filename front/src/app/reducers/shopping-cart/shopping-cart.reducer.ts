@@ -1,12 +1,13 @@
 import {CartActions} from "./shopping-cart.actions";
 import {Action, ActionReducer, createReducer, on} from "@ngrx/store";
 import {State} from "../index";
+import {ProductInfo} from "../../shared/interfaces";
 
 
 export const cartNode = 'cart'
 
 export interface CartState {
-  products: any,
+  products: ProductInfo[],
   price: number
 }
 
@@ -15,15 +16,44 @@ const initialState: CartState = {
   price: 0
 }
 
+// @ts-ignore
+// @ts-ignore
 const createdCartReducer = createReducer(
   initialState,
+  on(CartActions.load, (curState, {state}) => ({
+    ...state
+  })),
   on(CartActions.increasePrice, (state, {increasePrice}) => ({
     ...state,
     price: state.price + increasePrice
   })),
+  on(CartActions.decreasePrice, (state, {decreasePrice}) => ({
+    ...state,
+    price: state.price - decreasePrice
+  })),
+  on(CartActions.increaseCount, (state, {productInfo}) => ({
+    ...state,
+    products: state.products.map(
+      (curProduct: ProductInfo) =>
+        curProduct.product.uniq_name === productInfo.product.uniq_name
+          ? {...curProduct, count: curProduct.count + productInfo.product.packing}
+          : {...curProduct})
+  })),
+  on(CartActions.decreaseCount, (state, {productInfo}) => ({
+    ...state,
+    products: state.products.map(
+      (curProduct: ProductInfo) =>
+        curProduct.product.uniq_name === productInfo.product.uniq_name
+          ? {...curProduct, count: curProduct.count - productInfo.product.packing}
+          : {...curProduct})
+  })),
   on(CartActions.addProduct, (state, {productInfo}) => ({
     ...state,
     products:[...state.products, productInfo]
+  })),
+  on(CartActions.deleteProduct, (state, {productInfo}) => ({
+    ...state,
+    products: [...state.products.filter( (curProduct: ProductInfo) => curProduct.product.uniq_name !== productInfo.product.uniq_name)]
   }))
 )
 

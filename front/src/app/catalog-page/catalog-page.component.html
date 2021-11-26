@@ -1,10 +1,10 @@
-<h2>{{currentTitle}}</h2>
 <div class="breadCrumbs">
   <div class="breadCrumbs-content"  *ngFor="let crumb of breadCrumbs; let index = index">
     <img [style]="index === 0 ? 'display:none':''" src="assets/icons/option_arrow.svg">
     <a class="crum" [class.active-bread]="index === breadCrumbs.length - 1" (click)="routeToCrumb(breadCrumbs, index)" >{{crumb.title}}</a>
   </div>
 </div>
+<h2 class="catalog-title">{{currentTitle}}</h2>
 <div class="catalog-grid" *ngIf="categories && isCatalog">
   <div class="catalog-card object-fit:cover; card" *ngFor="let category of categories" (click)="goToCategory(category)">
     <h2>{{category.title}}</h2>
@@ -57,15 +57,17 @@
         <span>Фасовка: {{product.packing}}</span>
       </div>
       <div class="card-buttons">
-        <div class="card-add">
-          <i>-</i>
-          <span>1</span>
-          <i>+</i>
+        <div *ngIf="productsCart$ | async | getFilterProduct: product as ProductInfo"  class="wrapper-card-add">
+          <div class="card-add">
+            <i (click)="decreaseCount(ProductInfo)">-</i>
+            <span>{{ProductInfo.count}}</span>
+            <i (click)="increaseCount(ProductInfo)">+</i>
+          </div>
+        <span>шт.</span>
         </div>
         <button class="btn-red"  *ngIf="productsCart$ | async | filterProduct: product; else toCart" [routerLink]="['/cart']" >В корзину</button>
         <ng-template #toCart>
           <button class="card-buy" (click)="buyProduct(product)">Купить</button>
-
         </ng-template>
       </div>
     </div>
@@ -81,13 +83,13 @@
   <div class="product-content">
     <div class="product-content__info">
       <div>
-        <b>Артикул: </b>543
+        <b>Артикул: </b>{{currentProduct.article_number}}
       </div>
       <div>
-        <b>Фасовка: </b>543
+        <b>Фасовка: </b>{{currentProduct.packing}}
       </div>
       <div>
-        <b>Количество: </b>543
+        <b>Количество: </b>{{currentProduct.count}}
       </div>
     </div>
     <div class="product-content__buttons">
@@ -95,20 +97,30 @@
       <div class="inactive">Отзывы</div>
     </div>
     <div class="product-content__desc">
-      Описание!Описание!Описание!Описание!Описание!Описание!Описание!Описание!Описание!
-      Описание!Описание!Описание!Описание!Описание!Описание!Описание!Описание!Описание!
-      Описание!Описание!Описание!Описание!Описание!Описание!Описание!Описание!Описание!
+      {{currentProduct.description}}
     </div>
   </div>
   <div class="product-price">
     <div class="product-price__block">
-      <div class="product-price__price">30 руб.</div>
-      <div class="flex-card-add">
-        <i>-</i>
-        <span>0</span>
-        <i>+</i>
+      <div class="product-price__price">{{currentProduct.price}} руб.</div>
+      <div class="product-price__price-help">за упаковку</div>
+      <div  *ngIf="productsCart$ | async | getFilterProduct: currentProduct as ProductInfo; else templatePrice"   class="wrapper-flex-card-add">
+        <div class="flex-card-add">
+          <i (click)="decreaseCount(ProductInfo)">-</i>
+          <span>{{ProductInfo.count}}</span>
+          <i (click)="increaseCount(ProductInfo)">+</i>
+        </div>
+        <span>шт.</span>
       </div>
-      <button class="flex-card-buy">Купить</button>
+
+      <ng-template #templatePrice>
+        <div style="height: 30px"></div>
+      </ng-template>
+
+      <button class="flex-btn-red"  *ngIf="productsCart$ | async | filterProduct: currentProduct; else toCart" [routerLink]="['/cart']" >В корзину</button>
+      <ng-template #toCart>
+        <button class="flex-card-buy" (click)="buyProduct(currentProduct)">Купить</button>
+      </ng-template>
     </div>
     <img class="product-price__tree" src="assets/images/card_tree.svg" alt="">
   </div>

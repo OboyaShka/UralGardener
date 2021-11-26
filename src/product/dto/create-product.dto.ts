@@ -7,7 +7,7 @@ export class createProductDto {
   readonly uniq_name: string
   readonly description: string
   readonly article_number: number
-  readonly packing: string
+  readonly packing: number
   readonly packing_type?: string
   readonly price: number
   readonly brand_id?: string

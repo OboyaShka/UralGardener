@@ -39,7 +39,7 @@ export interface Product {
   position_uniq: string | null
   description: string
   article_number: number
-  packing: string
+  packing: number
   packing_type?: string
   price: number
   brand_id?: string
@@ -47,6 +47,10 @@ export interface Product {
   image? : string
 }
 
+export interface ProductInfo {
+  count: number,
+  product: Product
+}
 
 export interface AuthResponse {
   accessToken: string
