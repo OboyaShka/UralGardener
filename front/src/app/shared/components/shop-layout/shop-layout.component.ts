@@ -28,11 +28,12 @@ export class ShopLayoutComponent implements OnInit {
 
   ngOnInit(): void {
     let token = localStorage.getItem('token')
-    this.cartSyncStorage.init()
 
-    this.categoryService.getAllCategories().subscribe((res) => {
-    this.categories = res
-  })
+    this.cartSyncStorage.init()
+    //
+    // this.categoryService.getAllCategories().subscribe((res) => {
+    //   this.categories = res
+    // })
   }
 
 }

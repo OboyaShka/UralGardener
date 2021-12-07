@@ -6,7 +6,7 @@
 
 
     <div
-      class="form-control">
+      class="form-control-custom">
       <label for="category">Категория: </label>
       <select id="category" [(ngModel)]="selected" formControlName="category">
         <option [ngValue]="null" placeholder="Выберите категорию...">Выберите категорию...</option>
@@ -17,7 +17,7 @@
 
 
     <div
-      class="form-control"
+      class="form-control-custom"
       [ngClass]="{invalid: form.get('name')?.touched && form.get('name')?.invalid}"
     >
       <label for="phone">Название: </label>
@@ -33,7 +33,7 @@
     </div>
 
     <div
-      class="form-control"
+      class="form-control-custom"
       [ngClass]="{invalid: form.get('name')?.touched && form.get('name')?.invalid}"
     >
       <label for="uniq_name">Уникальный идентификатор: </label>
@@ -56,7 +56,7 @@
     <div class="center button-container">
       <button
         type="submit"
-        class="btn"
+        class="btn-custom"
         [disabled]="form.invalid"
       >Создать
       </button>

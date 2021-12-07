@@ -26,6 +26,8 @@ import {metaReducers, reducers} from "./reducers";
 import {FilterProduct, getFilterProduct, totalPrice} from "./shared/pipes/filter-cart.pipe";
 import {CartPageComponent} from "./cart-page/cart-page.component";
 import {ShoppingCartEffects} from "./reducers/shopping-cart/shopping-cart.effects";
+import {SliderComponent} from "./shared/components/slider/slider.component";
+import {NgbModule} from "@ng-bootstrap/ng-bootstrap"
 
 const INTERCEPTOR_PROVIDER: Provider = {
   provide: HTTP_INTERCEPTORS,
@@ -36,6 +38,7 @@ const INTERCEPTOR_PROVIDER: Provider = {
 @NgModule({
   declarations: [
     AppComponent,
+    SliderComponent,
     ShopLayoutComponent,
     MainPageComponent,
     CatalogPageComponent,
@@ -52,6 +55,7 @@ const INTERCEPTOR_PROVIDER: Provider = {
     totalPrice
   ],
   imports: [
+    NgbModule,
     BrowserModule,
     AppRoutingModule,
     SharedModule,

@@ -14,7 +14,7 @@
         <!--        <div class="alert alert-danger" *ngIf="authService.error$ | async as error">{{error}}</div>-->
 
         <div
-          class="form-control"
+          class="form-control-custom"
           [ngClass]="{invalid: form.get('phone')?.touched && form.get('phone')?.invalid}"
         >
           <label for="phone">Телефон: </label>
@@ -34,7 +34,7 @@
         </div>
 
         <div
-          class="form-control"
+          class="form-control-custom"
           [ngClass]="{invalid: form.get('fio')?.touched && form.get('fio')?.invalid}"
         >
           <label for="email">Ф.И.О: </label>
@@ -49,7 +49,7 @@
           </div>
         </div>
         <div
-          class="form-control"
+          class="form-control-custom"
           [ngClass]="{invalid: form.get('email')?.touched && form.get('email')?.invalid}"
         >
           <label for="email">Ваш e-mail (Не обязательно): </label>
@@ -70,7 +70,7 @@
       <div>
         <div formGroupName="passwords">
           <div
-            class="form-control"
+            class="form-control-custom"
             [ngClass]="{invalid: form.get('passwords')?.get('password')?.touched && form.get('passwords')?.get('password')?.invalid}"
           >
             <label for="password">Старый пароль: </label>
@@ -90,7 +90,7 @@
             </div>
           </div>
           <div
-            class="form-control"
+            class="form-control-custom"
             [ngClass]="{invalid: (form.get('passwords')?.get('passwordNew')?.invalid || form.get('passwords')?.invalid)}"
           >
             <label for="password-repeat">Придумайте пароль: </label>
@@ -122,7 +122,7 @@
         <div class="center button-container">
           <button
             type="submit"
-            class="btn"
+            class="btn-custom"
             [disabled]="form.invalid"
           >Сохранить
           </button>

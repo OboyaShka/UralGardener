@@ -6,7 +6,7 @@
 
 
     <div
-      class="form-control">
+      class="form-control-custom">
       <label for="category_id">Категория: </label>
       <select id="category_id" [(ngModel)]="selected_category" formControlName="category_id" (change)="selectCategory(selected_category)" >
         <option [ngValue]="null" placeholder="Выберите категорию...">Выберите категорию...</option>
@@ -15,7 +15,7 @@
 
     </div>
     <div
-      class="form-control">
+      class="form-control-custom">
       <label for="division_id">Подразделение: </label>
       <select
         id="division_id"
@@ -29,7 +29,7 @@
 
     </div>
     <div
-      class="form-control">
+      class="form-control-custom">
       <label for="position_id">Позиция: </label>
       <select id="position_id"
               [(ngModel)]="selected_position"
@@ -44,7 +44,7 @@
 
 
     <div
-      class="form-control"
+      class="form-control-custom"
       [ngClass]="{invalid: form.get('title')?.touched && form.get('title')?.invalid}"
     >
       <label for="phone">Название: </label>
@@ -60,7 +60,7 @@
     </div>
 
     <div
-      class="form-control"
+      class="form-control-custom"
       [ngClass]="{invalid: form.get('description')?.touched && form.get('description')?.invalid}"
     >
       <label for="description">Описание продукта: </label>
@@ -76,7 +76,7 @@
     </div>
 
     <div
-      class="form-control"
+      class="form-control-custom"
       [ngClass]="{invalid: form.get('description')?.touched && form.get('description')?.invalid}"
     >
       <label for="price">Цена продукта: </label>
@@ -92,7 +92,7 @@
     </div>
 
     <div
-      class="form-control"
+      class="form-control-custom"
       [ngClass]="{invalid: form.get('description')?.touched && form.get('description')?.invalid}"
     >
       <label for="article_number">Артикул: </label>
@@ -108,7 +108,7 @@
     </div>
 
     <div
-      class="form-control"
+      class="form-control-custom"
       [ngClass]="{invalid: form.get('description')?.touched && form.get('description')?.invalid}"
     >
       <label for="product_count">Количество: </label>
@@ -124,7 +124,7 @@
     </div>
 
     <div
-      class="form-control"
+      class="form-control-custom"
       [ngClass]="{invalid: form.get('description')?.touched && form.get('description')?.invalid}"
     >
       <label for="packing">Фасовка: </label>
@@ -140,7 +140,7 @@
     </div>
 
     <div
-      class="form-control"
+      class="form-control-custom"
       [ngClass]="{invalid: form.get('name')?.touched && form.get('name')?.invalid}"
     >
       <label for="uniq_name">Уникальный идентификатор: </label>
@@ -161,7 +161,7 @@
     </div>
 
     <div
-      class="form-control"
+      class="form-control-custom"
 
     >
       <div class="form-image">
@@ -173,7 +173,7 @@
         >
         <button
           type="button"
-          class="btn"
+          class="btn-custom"
           (click)="triggerClick()"
         >
           Загрузить изображение
@@ -188,7 +188,7 @@
     <div class="center button-container">
       <button
         type="submit"
-        class="btn"
+        class="btn-custom"
         [disabled]="form.invalid"
       >Создать
       </button>

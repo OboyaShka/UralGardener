@@ -20,6 +20,7 @@ export class NgrxSyncStorageService {
     }
 
     this.isInit = true
+
     this.loadFromStorage()
 
     this.store$.pipe(
@@ -36,6 +37,7 @@ export class NgrxSyncStorageService {
 
   private loadFromStorage() {
     const storageState = localStorage.getItem(CART_LOCALSTORAGE_KEY)
+
     if (storageState) {
       this.store$.dispatch(CartActions.load({
         state: JSON.parse(storageState)

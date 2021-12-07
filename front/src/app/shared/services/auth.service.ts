@@ -73,7 +73,7 @@ export class AuthService {
       localStorage.setItem('token-exp', expDate.toString())
       localStorage.setItem('user-role', res.userRole)
     } else {
-      localStorage.clear()
+      // localStorage.clear()
     }
   }
 }

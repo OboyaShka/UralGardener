@@ -8,7 +8,7 @@
         [routerLink]="['/catalog', productInfo.product.category_uniq, productInfo.product.division_uniq, productInfo.product.position_uniq, productInfo.product.uniq_name,]"
         class="cart-card__title"
       >{{productInfo.product.title}}</p>
-      <span class="cart-card__price">{{productInfo.product.price}} руб</span>
+      <span class="cart-card__price">{{productInfo.product.price}} руб.</span>
       <div  class="cart-card__add wrapper-flex-card-add">
         <div class="flex-card-add">
           <i (click)="decreaseCount(productInfo)">-</i>
@@ -19,7 +19,7 @@
       </div>
       <div class="cart-card__price-all">
         <b>
-          Сумма: {{productInfo.product.price * productInfo.count}}
+          Сумма: {{productInfo.product.price * productInfo.count}} руб.
         </b>
       </div>
       <div class="cart-card__delete" (click)="deleteProduct(productInfo)">
@@ -36,8 +36,8 @@
 
       </div>
       <div class="total-price">
-        <b>Итоговая цена: {{productsCart$ | async | totalPrice}}</b>
-        <b>Цена со скидкой: {{productsCart$ | async | totalPrice}}</b>
+        <b>Итоговая цена: {{productsCart$ | async | totalPrice}} руб.</b>
+        <b>Цена со скидкой: {{productsCart$ | async | totalPrice}} руб.</b>
       </div>
       <button class="btn-medium btn">Оформить заказ</button>
     </div>
