@@ -1,0 +1,34 @@
+<div class="owl-carousel-main"  *ngIf="slider">
+
+  <a class="link-carousel" [routerLink]="[slider.url]">
+    <h3>{{slider.title}}</h3>
+    <img src="assets/icons/link-arrow.svg" alt="main-logo">
+  </a>
+  <owl-carousel-o [options]="customOptions" (dragging)="isDragging = $event.dragging">
+    <ng-template *ngFor="let product of slider.products" carouselSlide>
+      <div class="shop-card">
+        <img (click)="goToProduct($event, product)" class="card-img" [src]="env.url + '/' + product.image">
+        <p class="card-text">{{product.title}}</p>
+        <div class="card-price">
+          <var>{{product.price}} рублей</var>
+          <span>Фасовка: {{product.packing}}</span>
+        </div>
+        <div class="card-buttons">
+          <div *ngIf="productsCart$ | async | getFilterProduct: product as ProductInfo"  class="wrapper-card-add">
+            <div class="card-add">
+              <i (click)="decreaseCount(ProductInfo)">-</i>
+              <span>{{ProductInfo.count}}</span>
+              <i (click)="increaseCount(ProductInfo)">+</i>
+            </div>
+            <span>шт.</span>
+          </div>
+          <button class="btn-red"  *ngIf="productsCart$ | async | filterProduct: product; else toCart" [routerLink]="['/cart']" >В корзину</button>
+          <ng-template #toCart>
+            <button class="card-buy" (click)="buyProduct(product)">Купить</button>
+          </ng-template>
+        </div>
+      </div>
+    </ng-template>
+  </owl-carousel-o>
+</div>
+

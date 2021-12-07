@@ -15,7 +15,6 @@ import {CatalogPageComponent} from "../../../catalog-page/catalog-page.component
   styleUrls: ['./shop-layout.component.scss']
 })
 export class ShopLayoutComponent implements OnInit {
-  public price$: Observable<number> = this.store$.pipe(select(selectPrice))
   categories: Category[] = []
 
   constructor(

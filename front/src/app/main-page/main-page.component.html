@@ -1,5 +1,6 @@
-<p>main-page works!</p>
-
 <app-slider></app-slider>
 
-<a [routerLink]="['/catalog']">Каталог</a>
+<div *ngIf="sliderData" >
+  <app-product-slider *ngFor="let slider of sliderData" [slider]="slider" ></app-product-slider>
+</div>
+

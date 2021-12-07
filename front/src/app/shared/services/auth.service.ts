@@ -73,7 +73,9 @@ export class AuthService {
       localStorage.setItem('token-exp', expDate.toString())
       localStorage.setItem('user-role', res.userRole)
     } else {
-      // localStorage.clear()
+      localStorage.removeItem('token');
+      localStorage.removeItem('token-exp');
+      localStorage.removeItem('user-role');
     }
   }
 }

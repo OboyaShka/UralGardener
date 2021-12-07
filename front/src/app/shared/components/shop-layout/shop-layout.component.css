@@ -2,25 +2,20 @@
   .header__search {
     display: none;
   }
-
 }
-
 @media (max-width: 992px) {
-  .header__cart {
-    span {
-      display: none;
-    }
+  .header__cart span {
+    display: none;
   }
 }
-
 @media (max-width: 768px) {
   .header__cart {
     display: none;
   }
 
-
   .header__buttons {
     display: none;
   }
-
 }
+
+/*# sourceMappingURL=shop-layout.component.css.map */

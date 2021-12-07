@@ -57,3 +57,10 @@ export interface AuthResponse {
   expiresIn: string
   userRole: string
 }
+
+export interface SliderData {
+  division_uniq: string,
+  title: string,
+  url: string,
+  products: Product[]
+}

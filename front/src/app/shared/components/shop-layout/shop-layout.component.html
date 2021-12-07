@@ -1,41 +1,18 @@
-<nav class="navbar">
-  <ul>
-    <li>
-      <a [routerLink]="['/']"><img src="assets/images/main_logo.svg" alt="main-logo"></a>
-    </li>
-    <li>
-      <input type="search" placeholder="Поиск товара...">
-    </li>
-    <li class="header__cart" [routerLink]="['/cart']" style="cursor: pointer">
-      <a>{{ price$ | async}} руб <img src="assets/icons/cart.svg"></a>
-    </li>
-    <li>
-      <div *ngIf="!authService.isAuthenticated()">
-        <a [routerLink]="['/login']">Вход</a>
-        <p>/</p>
-        <a [routerLink]="['/register']">Регистрация</a>
-      </div>
-      <div class="header__buttons" *ngIf="authService.isAuthenticated()">
-        <a [routerLink]="['/profile']">Личный кабинет</a>
-        <p>/</p>
-        <a [routerLink]="['/']" (click)="this.authService.logout()">Выйти</a>
-      </div>
-
-    </li>
-  </ul>
-
-</nav>
-
-<nav>
-<!--  <ul class="nav-categories">-->
-<!--    <li *ngFor="let category of categories">-->
-<!--      <a [routerLink]="['/catalog', category.uniq_name]">-->
-<!--        {{category.title}}-->
-<!--      </a>-->
-<!--    </li>-->
-<!--  </ul>-->
-</nav>
+<div class="container">
+  <app-header></app-header>
 
 
-<router-outlet></router-outlet>
+  <nav>
+    <!--  <ul class="nav-categories">-->
+    <!--    <li *ngFor="let category of categories">-->
+    <!--      <a [routerLink]="['/catalog', category.uniq_name]">-->
+    <!--        {{category.title}}-->
+    <!--      </a>-->
+    <!--    </li>-->
+    <!--  </ul>-->
+  </nav>
 
+  <router-outlet></router-outlet>
+</div>
+
+<app-footer></app-footer>

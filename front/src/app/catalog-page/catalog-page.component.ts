@@ -284,7 +284,7 @@ export class CatalogPageComponent implements OnInit {
 
   increaseCount(productInfo: ProductInfo){
     if (productInfo.count + productInfo.product.packing > productInfo.product.count) {
-      this.store$.dispatch(CartActions.deleteProduct({productInfo: productInfo}))
+      // this.store$.dispatch(CartActions.deleteProduct({productInfo: productInfo}))
     } else {
       this.store$.dispatch(CartActions.increaseCount({productInfo: productInfo}))
     }
@@ -296,5 +296,10 @@ export class CatalogPageComponent implements OnInit {
     } else {
       this.store$.dispatch(CartActions.decreaseCount({productInfo: productInfo}))
     }
+  }
+
+  goToCatalog() {
+    this.isCatalog=true
+    this.currentTitle = 'Каталог'
   }
 }

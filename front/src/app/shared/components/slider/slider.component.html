@@ -1,5 +1,5 @@
 <div class="wrapper-carousel">
-  <ngb-carousel #carousel [interval]="3000" [pauseOnHover]="pauseOnHover" [pauseOnFocus]="pauseOnFocus" (slide)="onSlide($event)">
+  <ngb-carousel #carousel [interval]="7000" [pauseOnHover]="pauseOnHover" [pauseOnFocus]="pauseOnFocus" (slide)="onSlide($event)">
     <ng-template ngbSlide *ngFor="let slide of slides; index as i">
       <div class="carousel-caption">
         <h3>{{slide.title}}</h3>

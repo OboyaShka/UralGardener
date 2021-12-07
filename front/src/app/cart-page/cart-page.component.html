@@ -1,6 +1,6 @@
 <h2>Моя корзина</h2>
 
-<div  class="card">
+<div  class="card cart-container">
   <div  *ngFor="let productInfo of (productsCart$ | async) as productsCart ">
     <div class="cart-card">
       <img class="cart-card__img" [src]="env.url + '/' + productInfo.product.image" alt="">
@@ -39,7 +39,7 @@
         <b>Итоговая цена: {{productsCart$ | async | totalPrice}} руб.</b>
         <b>Цена со скидкой: {{productsCart$ | async | totalPrice}} руб.</b>
       </div>
-      <button class="btn-medium btn">Оформить заказ</button>
+      <button class="btn-medium btn-custom">Оформить заказ</button>
     </div>
   </div>
 </div>

@@ -12,12 +12,12 @@ export class SliderComponent {
   slides = [
     {
       image: `https://img4.goodfon.ru/wallpaper/nbig/b/19/velikobritaniia-biddulph-grange-garden-sad-prud-dorozhka-gaz.jpg`,
-      link: '/catalog/seeds',
+      link: '/catalog/seeds/flowers',
       title: 'Широкий выбор цветов'
     },
     {
-      image: `https://polza-vred.su/wp-content/uploads/2019/11/screenshot_1-3.jpg`,
-      link: '/catalog/vegetables',
+      image: `https://selhozproduct.ru/upload/usl/f_60ae88d828437.jpg`,
+      link: '/catalog/seeds/vegetables',
       title: 'Широкий выбор овощей'
     },
     {

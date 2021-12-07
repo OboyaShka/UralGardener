@@ -36,7 +36,7 @@
 
     <div
       class="form-control-custom"
-      [ngClass]="{invalid: form.get('name')?.touched && form.get('name')?.invalid}"
+      [ngClass]="{invalid: form.get('uniq_name')?.touched && form.get('uniq_name')?.invalid}"
     >
       <label for="uniq_name">Уникальный идентификатор: </label>
       <input id="uniq_name" placeholder="Введите идентификатор латинскими буквами" type="name" formControlName="uniq_name">

@@ -1,0 +1,30 @@
+<nav class="navbar">
+  <ul>
+    <li>
+      <a [routerLink]="['/']"><img src="assets/images/main_logo.svg" alt="main-logo"></a>
+    </li>
+    <li class="header__search" >
+      <input type="search" placeholder="Поиск товара...">
+    </li>
+    <li class="header__cart" [routerLink]="['/cart']" style="cursor: pointer">
+      <a>
+        <span>{{ price$ | async}} руб </span>
+        <img src="assets/icons/cart.svg">
+      </a>
+    </li>
+    <li>
+      <div *ngIf="!authService.isAuthenticated()">
+        <a [routerLink]="['/login']">Вход</a>
+        <p>/</p>
+        <a [routerLink]="['/register']">Регистрация</a>
+      </div>
+      <div class="header__buttons" *ngIf="authService.isAuthenticated()">
+        <a [routerLink]="['/profile']">Личный кабинет</a>
+        <p>/</p>
+        <a [routerLink]="['/']" (click)="this.authService.logout()">Выйти</a>
+      </div>
+
+    </li>
+  </ul>
+
+</nav>

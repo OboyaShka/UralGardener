@@ -1,5 +1,9 @@
 import {NgModule, Provider} from '@angular/core';
 import { BrowserModule } from '@angular/platform-browser';
+import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
+import {HTTP_INTERCEPTORS} from "@angular/common/http";
+import { StoreModule } from '@ngrx/store';
+import {FormsModule, ReactiveFormsModule} from "@angular/forms";
 
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
@@ -11,13 +15,10 @@ import { CategoryPageComponent } from './category-page/category-page.component';
 import { DivisionPageComponent } from './division-page/division-page.component';
 import { PositionPageComponent } from './position-page/position-page.component';
 import { ProductPageComponent } from './product-page/product-page.component';
-import {FormsModule, ReactiveFormsModule} from "@angular/forms";
 import {SharedModule} from "./shared/shared.module";
 import { RegisterPageComponent } from './register-page/register-page.component';
 import { ProfilePageComponent } from './profile-page/profile-page.component';
-import {HTTP_INTERCEPTORS} from "@angular/common/http";
 import {AuthInterceptor} from "./shared/auth.interceptor";
-import { StoreModule } from '@ngrx/store';
 import { StoreDevtoolsModule } from '@ngrx/store-devtools';
 import { environment } from '../environments/environment';
 import { EffectsModule } from '@ngrx/effects';
@@ -28,6 +29,10 @@ import {CartPageComponent} from "./cart-page/cart-page.component";
 import {ShoppingCartEffects} from "./reducers/shopping-cart/shopping-cart.effects";
 import {SliderComponent} from "./shared/components/slider/slider.component";
 import {NgbModule} from "@ng-bootstrap/ng-bootstrap"
+import {ProductSliderComponent} from "./shared/components/product-slider/product-slider.component";
+import { CarouselModule } from 'ngx-owl-carousel-o';
+import {FooterComponent} from "./shared/components/footer/footer.component";
+import {HeaderComponent} from "./shared/components/header/header.component";
 
 const INTERCEPTOR_PROVIDER: Provider = {
   provide: HTTP_INTERCEPTORS,
@@ -51,10 +56,15 @@ const INTERCEPTOR_PROVIDER: Provider = {
     ProfilePageComponent,
     CartPageComponent,
     FilterProduct,
+    ProductSliderComponent,
     getFilterProduct,
-    totalPrice
+    totalPrice,
+    FooterComponent,
+    HeaderComponent
   ],
   imports: [
+    BrowserAnimationsModule,
+    CarouselModule,
     NgbModule,
     BrowserModule,
     AppRoutingModule,

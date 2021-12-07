@@ -14,7 +14,7 @@
 <div class="flex-catalog" *ngIf="!isCatalog && !isProduct">
   <div class="catalog-options">
     <div class="option-header">
-      <h4>Каталог</h4>
+      <a [routerLink]="['/catalog']" (click)="(goToCatalog())"><h4 >Каталог</h4></a>
     </div>
     <hr>
     <div class="option-body">
@@ -71,8 +71,6 @@
         </ng-template>
       </div>
     </div>
-
-
   </div>
 
 </div>

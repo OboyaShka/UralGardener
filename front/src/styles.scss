@@ -1,3 +1,5 @@
+//@import "~ngx-owl-carousel-o/lib/styles/scss/owl.carousel";
+//@import "~ngx-owl-carousel-o/lib/styles/scss/owl.theme.default";
 @import "~bootstrap/scss/bootstrap";
 
 
@@ -83,7 +85,7 @@ padding: 50px 50px;
 }
 
 article {
-min-height: 100vh;
+//min-height: 100vh;
 }
 
 h2 {
@@ -207,7 +209,7 @@ align-items: center;
 display: flex;
 justify-content: space-between;
 align-items: center;
-padding: 0.7rem 2rem;
+padding: 0.7rem 0rem;
 z-index: 1;
 width: 100%;
 opacity: 0.9;
@@ -779,7 +781,7 @@ padding-left: 5px;
   display: grid;
   grid-template-rows: 1fr 1fr;
   grid-gap: 10px;
-  font-size: 24px;
+  font-size: 22px
 }
 
 .total-sale {
@@ -806,4 +808,28 @@ padding-left: 5px;
 
 .carousel-inner {
   border-radius: 25px !important;
+}
+
+.owl-carousel-main {
+  margin: 50px 0px;
+}
+
+.owl-stage-outer {
+  padding-bottom: 6px;
+
+}
+
+.link-carousel {
+  display: flex;
+  align-items: center;
+  margin: 0px 0px 20px 20px;
+
+  & h3{
+    margin-bottom: 0;
+    padding-right: 5px;
+}
+}
+
+.cart-container {
+  margin-bottom: 300px;
 }
