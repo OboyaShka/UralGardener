@@ -1,0 +1,22 @@
+<div class="nav-products-wrapper">
+
+  <ul class="nav-products">
+    <li class="nav-products__product" *ngFor="let navOption of navOptions" (mouseenter)="navOption.hoverFlag=true"  (mouseleave)="navOption.hoverFlag=false">
+      <div>{{navOption.name}}</div>
+
+      <div class="nav-products__option" *ngIf="navOption.hoverFlag" (mouseleave)="navOption.hoverFlag=false">
+        <div [routerLink]="[navOption.url]" class="nav-products__option_active">{{navOption.name}}</div>
+        <ul *ngFor="let option of navOption.options">
+          <li
+            [routerLink]="
+              navOption.type === 'category' ? ['/catalog', option.category_uniq, option.uniq_name] :
+              navOption.type === 'division' ? ['/catalog', option.category_uniq, option.division_uniq ,option.uniq_name] :
+              navOption.type === 'position' ? ['/catalog', option.category_uniq, option.division_uniq , option.position_uniq , option.uniq_name] : []
+"
+            class="nav-products__item">{{option.title}}</li>
+        </ul>
+      </div>
+    </li>
+  </ul>
+</div>
+

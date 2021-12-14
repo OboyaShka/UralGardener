@@ -5,7 +5,7 @@
     <div class="alert alert-danger" *ngIf="authService.error$ | async as error">{{error}}</div>
 
     <div
-      class="form-control"
+      class="form-control-custom"
       [ngClass]="{invalid: form.get('phone')?.touched && form.get('phone')?.invalid}"
     >
       <label for="phone">Ваш номер телефона: </label>
@@ -24,7 +24,7 @@
     </div>
 
     <div
-      class="form-control"
+      class="form-control-custom"
       [ngClass]="{invalid: form.get('fio')?.touched && form.get('fio')?.invalid}"
     >
       <label for="email">Ф.И.О: </label>
@@ -39,7 +39,7 @@
       </div>
     </div>
     <div
-      class="form-control"
+      class="form-control-custom"
 
       [ngClass]="{invalid: form.get('email')?.touched && form.get('email')?.invalid}"
     >
@@ -57,7 +57,7 @@
 
     <div formGroupName="passwords">
       <div
-        class="form-control"
+        class="form-control-custom"
         [ngClass]="{invalid: form.get('passwords')?.get('password')?.touched && form.get('passwords')?.get('password')?.invalid}"
       >
         <label for="password">Придумайте пароль: </label>
@@ -77,7 +77,7 @@
         </div>
       </div>
       <div
-        class="form-control"
+        class="form-control-custom"
         [ngClass]="{invalid: form.get('passwords')?.get('passwordRepeat')?.touched && (form.get('passwords')?.errors?.mismatchedPasswords || form.get('passwords')?.get('passwordRepeat')?.invalid)}"
       >
         <label for="password-repeat">Повторите пароль: </label>
@@ -100,7 +100,7 @@
     <div class="center">
       <button
         type="submit"
-        class="btn btn-medium"
+        class="btn-custom btn-medium"
         [disabled]="form.invalid"
       >Зарегестрироваться
       </button>

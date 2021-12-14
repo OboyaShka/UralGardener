@@ -79,6 +79,7 @@ export class CatalogPageComponent implements OnInit {
           this.isCatalog = false
           this.divisionService.getDivisionsByUniqName(urlArray[2]).subscribe((divisions) => {
             this.setProducts(divisions[0], 'division')
+            this.optionInit(urlArray)
           })
           break
         case 4:
@@ -86,6 +87,8 @@ export class CatalogPageComponent implements OnInit {
           this.isCatalog = false
           this.positionService.getPositionsByUniqName(urlArray[3]).subscribe((positions) => {
             this.setProducts(positions[0], 'position')
+            this.optionInit(urlArray)
+
           })
           break
         case 5:
@@ -113,6 +116,46 @@ export class CatalogPageComponent implements OnInit {
 
       }
     })
+  }
+
+  optionInit(urlArray: any) {
+    this.categoriesOptions.map(
+      (category: any, indexC: number) =>
+        category.uniq_name === urlArray[1]
+          ?
+          (
+
+            this.divisionService.getDivisionsByCategoryUniq(category.uniq_name).subscribe((res) => {
+              this.categoriesOptions[indexC].divisionFlag = !this.categoriesOptions[indexC].divisionFlag
+              this.categoriesOptions[indexC].divisions = res
+
+              console.log('url', urlArray)
+              if (urlArray[3]) {
+                this.categoriesOptions[indexC].divisions.map(
+                  (division: any, indexD: number) =>
+                    division.uniq_name === urlArray[2]
+                      ?
+                      (
+                        this.positionService.getPositionsByDivisionUniq(division.uniq_name).subscribe((res) => {
+
+                          this.categoriesOptions[indexC].divisions[indexD].positionFlag = !this.categoriesOptions[indexC].divisions[indexD].positionFlag
+                          this.categoriesOptions[indexC].divisions[indexD].positions = res
+                          this.categoriesOptions[indexC].divisions[indexD].positions.map(
+                            (position: any) =>
+                              position.uniq_name === urlArray[3]?
+                                this.setLeaf(position)
+                              :''
+
+                          )
+                        })
+                      )
+                      : "")
+              }
+
+            })
+          )
+          : '')
+    console.log(this.categoriesOptions)
   }
 
   URLToArray(url: string) {
@@ -282,7 +325,7 @@ export class CatalogPageComponent implements OnInit {
     }))
   }
 
-  increaseCount(productInfo: ProductInfo){
+  increaseCount(productInfo: ProductInfo) {
     if (productInfo.count + productInfo.product.packing > productInfo.product.count) {
       // this.store$.dispatch(CartActions.deleteProduct({productInfo: productInfo}))
     } else {
@@ -290,7 +333,7 @@ export class CatalogPageComponent implements OnInit {
     }
   }
 
-  decreaseCount(productInfo: ProductInfo){
+  decreaseCount(productInfo: ProductInfo) {
     if (productInfo.count - productInfo.product.packing <= 0) {
       this.store$.dispatch(CartActions.deleteProduct({productInfo: productInfo}))
     } else {
@@ -299,7 +342,7 @@ export class CatalogPageComponent implements OnInit {
   }
 
   goToCatalog() {
-    this.isCatalog=true
+    this.isCatalog = true
     this.currentTitle = 'Каталог'
   }
 }

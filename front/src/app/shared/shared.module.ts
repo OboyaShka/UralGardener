@@ -11,7 +11,7 @@ import {FormsModule, ReactiveFormsModule} from "@angular/forms";
   exports: [
     HttpClientModule,
     FormsModule,
-    ReactiveFormsModule
+    ReactiveFormsModule,
   ],
   declarations: [
   ]
