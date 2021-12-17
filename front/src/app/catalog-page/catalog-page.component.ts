@@ -29,6 +29,7 @@ export class CatalogPageComponent implements OnInit {
   products: Product[] = []
   index: any
   breadCrumbs: any = []
+  productsLoading: boolean = true
   public productsCart$: Observable<any> = this.store$.pipe(select(selectProducts))
 
   constructor(
@@ -183,9 +184,10 @@ export class CatalogPageComponent implements OnInit {
       category
     ]
     this.currentTitle = category.title
-
+    this.productsLoading = true
     this.productService.getAllProducts(category.uniq_name).subscribe((products: Product[]) => {
       this.products = products
+      this.productsLoading = false
     })
 
     this.isCatalog = false
@@ -238,8 +240,10 @@ export class CatalogPageComponent implements OnInit {
           {title: 'Каталог', uniq_name: 'catalog'},
           object
         ]
+        this.productsLoading = true
         this.productService.getProductByCategory(object.uniq_name).subscribe((products: Product[]) => {
           this.products = products
+          this.productsLoading = false
         })
         break
       case 'division':
@@ -252,9 +256,10 @@ export class CatalogPageComponent implements OnInit {
             object
           ]
         })
-
+        this.productsLoading = true
         this.productService.getProductByDivision(object.uniq_name).subscribe((products: Product[]) => {
           this.products = products
+          this.productsLoading = false
         })
         break
       case 'position':
@@ -271,9 +276,10 @@ export class CatalogPageComponent implements OnInit {
           })
 
         })
-
+        this.productsLoading = true
         this.productService.getProductByPosition(object.uniq_name).subscribe((products: Product[]) => {
           this.products = products
+          this.productsLoading = false
         })
         break
     }

@@ -27,6 +27,7 @@
     "bootstrap": "^4.6.1",
     "ngx-owl-carousel-o": "^7.0.1",
     "rxjs": "~6.6.0",
+    "skeleton-screen-css": "^1.0.1",
     "tslib": "^2.3.0",
     "zone.js": "~0.11.4"
   },

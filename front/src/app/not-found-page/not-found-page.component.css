@@ -1,0 +1,43 @@
+article {
+  width: 100vw;
+  height: 100vh;
+  background-color: #FDFFF8;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: space-around;
+}
+article div {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+article div h1 {
+  font-family: a_FuturaRoundDemi;
+  font-style: normal;
+  font-weight: normal;
+  font-size: 144px;
+  line-height: 176px;
+  display: flex;
+  align-items: center;
+  text-align: center;
+}
+article div h2 {
+  font-family: a_FuturaRound;
+  font-style: normal;
+  font-weight: normal;
+  font-size: 48px;
+  line-height: 58px;
+  display: flex;
+  align-items: center;
+  text-align: center;
+  color: #000000;
+}
+article button {
+  width: 220px;
+  height: 77.35px;
+  font-size: 24px;
+  margin-bottom: 150px;
+}
+
+/*# sourceMappingURL=not-found-page.component.css.map */

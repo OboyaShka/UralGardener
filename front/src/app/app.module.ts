@@ -35,6 +35,7 @@ import { CarouselModule } from 'ngx-owl-carousel-o';
 import {FooterComponent} from "./shared/components/footer/footer.component";
 import {HeaderComponent} from "./shared/components/header/header.component";
 import {NavBarComponent} from "./shared/components/nav-bar/nav-bar.component";
+import { NotFoundPageComponent } from './not-found-page/not-found-page.component';
 
 const INTERCEPTOR_PROVIDER: Provider = {
   provide: HTTP_INTERCEPTORS,
@@ -63,7 +64,8 @@ const INTERCEPTOR_PROVIDER: Provider = {
     totalPrice,
     FooterComponent,
     HeaderComponent,
-    NavBarComponent
+    NavBarComponent,
+    NotFoundPageComponent
   ],
   imports: [
     CommonModule,

@@ -1,0 +1,48 @@
+article {
+  width: 100vw;
+  height: 100vh;
+  background-color: #FDFFF8;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: space-around;
+
+  div{
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+
+     h1 {
+       font-family: a_FuturaRoundDemi;
+       font-style: normal;
+       font-weight: normal;
+       font-size: 144px;
+       line-height: 176px;
+       display: flex;
+       align-items: center;
+       text-align: center;
+     }
+
+    h2 {
+      font-family: a_FuturaRound;
+      font-style: normal;
+      font-weight: normal;
+      font-size: 48px;
+      line-height: 58px;
+      display: flex;
+      align-items: center;
+      text-align: center;
+      color: #000000;
+    }
+
+  }
+
+
+  button {
+    width: 220px;
+    height: 77.35px;
+    font-size: 24px;
+    margin-bottom: 150px;
+  }
+
+}

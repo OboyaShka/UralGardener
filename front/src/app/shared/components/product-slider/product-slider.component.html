@@ -4,7 +4,7 @@
     <h3>{{slider.title}}</h3>
     <img src="assets/icons/link-arrow.svg" alt="main-logo">
   </a>
-  <owl-carousel-o [options]="customOptions" (dragging)="isDragging = $event.dragging">
+  <owl-carousel-o [options]="customOptions" (dragging)="isDragging = $event.dragging" *ngIf="slider.products.length > 0; else skeletonCards" >
     <ng-template *ngFor="let product of slider.products" carouselSlide>
       <div class="shop-card">
         <img (click)="goToProduct($event, product)" class="card-img" [src]="env.url + '/' + product.image">
@@ -29,6 +29,28 @@
         </div>
       </div>
     </ng-template>
+
   </owl-carousel-o>
 </div>
 
+
+<ng-template #skeletonCards>
+  <owl-carousel-o [options]="customOptions">
+    <ng-template carouselSlide>
+      <div class="skeleton-card ssc-head-line">
+      </div>
+    </ng-template>
+    <ng-template carouselSlide>
+      <div class="skeleton-card ssc-head-line">
+      </div>
+    </ng-template>
+    <ng-template carouselSlide>
+      <div class="skeleton-card ssc-head-line">
+      </div>
+    </ng-template>
+    <ng-template carouselSlide>
+      <div class="skeleton-card ssc-head-line">
+      </div>
+    </ng-template>
+  </owl-carousel-o>
+</ng-template>

@@ -13,6 +13,7 @@ import {ProfilePageComponent} from "./profile-page/profile-page.component";
 import {AuthGuard} from "./shared/auth.guard";
 import {AdminGuard} from "./shared/admin.guard";
 import {CartPageComponent} from "./cart-page/cart-page.component";
+import {NotFoundPageComponent} from "./not-found-page/not-found-page.component";
 
 const routes: Routes = [
   {
@@ -41,9 +42,12 @@ const routes: Routes = [
       },
       {
         path: 'admin', canActivate: [AuthGuard, AdminGuard], loadChildren: () => import('./admin/admin.module').then(m => m.AdminModule)
-      }
+      },
     ]
-  }]
+  },
+  {path: '404', component: NotFoundPageComponent},
+  {path: '**', redirectTo: '/404'}
+  ]
 
 @NgModule({
   imports: [RouterModule.forRoot(routes, {scrollPositionRestoration: 'enabled'})],

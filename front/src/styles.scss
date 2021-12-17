@@ -1,7 +1,7 @@
 //@import "~ngx-owl-carousel-o/lib/styles/scss/owl.carousel";
 //@import "~ngx-owl-carousel-o/lib/styles/scss/owl.theme.default";
 @import "~bootstrap/scss/bootstrap";
-
+@import "~skeleton-screen-css";
 
 :root {
   --green-color: #32AA77;
@@ -351,6 +351,13 @@ color:  #505050; /*для IE */
   display: grid;
   grid-template-columns: 1fr 1fr 1fr;
   grid-gap: 2vw;
+  position: relative;
+}
+
+.no-items {
+  position: absolute;
+
+  left: 50px;
 }
 
 .shop-card {
@@ -644,8 +651,11 @@ color:  #505050; /*для IE */
 }
 
 .catalog-card {
+  object-fit: cover;
 
-
+  img {
+    height: 350px;
+  }
 }
 
 .catalog-card img{
@@ -655,7 +665,7 @@ color:  #505050; /*для IE */
 
 .breadCrumbs {
   display: flex;
-  margin-bottom: 10px;
+  margin: 10px 0px;
 
 }
 

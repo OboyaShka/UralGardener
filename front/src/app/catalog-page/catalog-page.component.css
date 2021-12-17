@@ -2,4 +2,9 @@
   color: var(--green-color);
 }
 
+.skeleton-card {
+  width: 270px;
+  height: 426px;
+}
+
 /*# sourceMappingURL=catalog-page.component.css.map */

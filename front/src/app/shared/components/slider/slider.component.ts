@@ -21,7 +21,7 @@ export class SliderComponent {
       title: 'Широкий выбор овощей'
     },
     {
-      image: `https://alt.selhozproduct.ru/upload/usl/f_60817a9bd00d9.jpg`,
+      image: `https://i0.wp.com/uri-ventures.org/wp-content/uploads/2019/03/qtq80-iQH87a.jpeg?fit=2160%2C1440&ssl=1`,
       link: '/catalog/agrochemistry',
       title: 'Широкий выбор агрохимии'
     }]

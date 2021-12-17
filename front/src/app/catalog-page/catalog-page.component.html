@@ -1,13 +1,16 @@
 <section>
-  <div class="breadCrumbs">
-    <div class="breadCrumbs-content"  *ngFor="let crumb of breadCrumbs; let index = index">
+  <div *ngIf="breadCrumbs.length > 0; else skeletonCrumbs" class="breadCrumbs">
+    <div  class="breadCrumbs-content"  *ngFor="let crumb of breadCrumbs; let index = index">
       <img [style]="index === 0 ? 'display:none':''" src="assets/icons/option_arrow.svg">
       <a class="crum" [class.active-bread]="index === breadCrumbs.length - 1" (click)="routeToCrumb(breadCrumbs, index)" >{{crumb.title}}</a>
     </div>
   </div>
+  <ng-template #skeletonCrumbs>
+    <div class="breadCrumbs ssc-head-line w-70 mb"></div>
+  </ng-template>
   <h2 class="catalog-title">{{currentTitle}}</h2>
   <div class="catalog-grid" *ngIf="categories && isCatalog">
-    <div class="catalog-card object-fit:cover; card" *ngFor="let category of categories" (click)="goToCategory(category)">
+    <div class="catalog-card card" *ngFor="let category of categories" (click)="goToCategory(category)">
       <h2>{{category.title}}</h2>
       <img [src]="env.url+ '/' + category.image" alt="">
     </div>
@@ -49,7 +52,8 @@
 
     </div>
 
-    <div *ngIf="products" class="catalog-shop">
+    <div *ngIf="products && !productsLoading; else skeletonCards" class="catalog-shop">
+      <div class="no-items"><h3 *ngIf="products.length === 0">Таких товаров не найдено!</h3></div>
       <div *ngFor="let product of products" class="shop-card">
         <img (click)="goToProduct(product)" class="card-img" [src]="env.url + '/' + product.image">
         <p class="card-text">{{product.title}}</p>
@@ -73,6 +77,20 @@
         </div>
       </div>
     </div>
+
+    <ng-template #skeletonCards>
+      <div class="catalog-shop">
+        <div class="skeleton-card ssc-head-line"></div>
+        <div class="skeleton-card ssc-head-line"></div>
+        <div class="skeleton-card ssc-head-line"></div>
+        <div class="skeleton-card ssc-head-line"></div>
+        <div class="skeleton-card ssc-head-line"></div>
+        <div class="skeleton-card ssc-head-line"></div>
+        <div class="skeleton-card ssc-head-line"></div>
+        <div class="skeleton-card ssc-head-line"></div>
+        <div class="skeleton-card ssc-head-line"></div>
+      </div>
+    </ng-template>
 
   </div>
 
