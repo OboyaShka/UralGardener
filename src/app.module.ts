@@ -12,10 +12,11 @@ import { FileModule } from './file/file.module';
 import {JwtModule} from "@nestjs/jwt";
 import { ProductModule } from './product/product.module';
 
+
 @Module({
   imports: [
     AuthModule,
-    MongooseModule.forRoot(`mongodb+srv://poznanskiy:poz123@cluster0.tnzoj.mongodb.net/myFirstDatabase?retryWrites=true&w=majority`),
+    MongooseModule.forRoot(process.env.mongoURI),
     ConfigModule.forRoot(),
     ProfileModule,
     CategoryModule,
