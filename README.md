@@ -8,5 +8,5 @@ Pet-project для повышения навыков работы с Angular
 
 Дизайн, Figma: https://www.figma.com/file/mNA2p4Bc2EhVUupdMMNkYD/UralGardener?node-id=0%3A1
 
-Демонстрация-демо: 
+Демонстрация (Альфа): https://youtu.be/nlqYbb3_L2g 
 
